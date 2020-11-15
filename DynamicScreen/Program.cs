@@ -11,7 +11,7 @@ namespace DynamicScreen
         [STAThread]
         public static void Main()
         {
-            var connString = "";
+            var connString = "Server=127.0.0.1;Port=5432;Database=DynamicScreen;User Id=DynamicScreen;Password=dinscr@123;";
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
