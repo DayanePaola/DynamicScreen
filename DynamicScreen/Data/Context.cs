@@ -15,19 +15,19 @@ namespace DynamicScreen.Data
     [DbConfigurationType(typeof(NpgSqlConfiguration))]
     public class Context : DbContext
     {
-        public Context()
+        public Context() : base("Context")
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = true;
             Database.Log = log => Debug.WriteLine(log);
         }
 
-        public Context(string connString) : base(connString)
-        {
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = true;
-            Database.Log = log => Debug.WriteLine(log);
-        }
+        //public Context(string connString) : base(connString)
+        //{
+        //    Configuration.LazyLoadingEnabled = false;
+        //    Configuration.ProxyCreationEnabled = true;
+        //    Database.Log = log => Debug.WriteLine(log);
+        //}
 
         public DbSet<ConfigurationColumnModel> ConfigurationColumn { get; set; }
         public DbSet<ConfigurationColumnFillModel> ConfigurationColumnFill { get; set; }
