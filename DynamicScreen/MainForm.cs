@@ -5,14 +5,13 @@ namespace DynamicScreen
 {
     public partial class MainForm : Form
     {
-        public MainForm(string connString)
+        public MainForm()
         {
             InitializeComponent();
 
-            using (var context = new Context(connString))
-            {
+            var db = new Context();
 
-            }
+            Application.Run(new Form2(db));
         }
     }
 }

@@ -2,9 +2,8 @@
 
 namespace DynamicScreen.Data.Models
 {
-    public class ConfigurationColumnModel
+    public class ConfigurationColumnModel : Entity
     {
-        public int Id { get; set; }
         public int ConfigurationId { get; set; }
         public string Group { get; set; }
         public string Title { get; set; }
