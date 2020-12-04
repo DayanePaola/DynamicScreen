@@ -75,6 +75,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\HardCode\InitialDataBase.cs" />
+    <Compile Include="Business\HardCode\ChaveHardCode.cs" />
+    <Compile Include="Business\HardCode\CondutorHardCode.cs" />
+    <Compile Include="Business\HardCode\EstruturaSecundariaHardCode.cs" />
+    <Compile Include="Business\HardCode\ObstaculoHardCode.cs" />
+    <Compile Include="Business\HardCode\ValorPadraoHardCode.cs" />
+    <Compile Include="Business\HardCode\TransformadorHardCode.cs" />
+    <Compile Include="Business\HardCode\ParaRaiosHardCode.cs" />
+    <Compile Include="Business\HardCode\ValuesDefault.cs" />
     <Compile Include="Business\Interfaces\IConfigurationColumnFillRepository.cs" />
     <Compile Include="Business\Interfaces\IConfigurationRowRepository.cs" />
     <Compile Include="Business\Interfaces\IConfigurationRepository.cs" />
@@ -99,6 +108,8 @@
     <Compile Include="Data\Respository\ConfigurationRepository.cs" />
     <Compile Include="Data\Respository\ConfigurationValueRepository.cs" />
     <Compile Include="Data\Respository\Repository.cs" />
+    <Compile Include="Dto\BaseSearchDto.cs" />
+    <Compile Include="Dto\SearchDto.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,7 +181,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Content Include="Resources\Pesquisar16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

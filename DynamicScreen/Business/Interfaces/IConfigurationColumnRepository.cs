@@ -9,6 +9,6 @@ namespace DynamicScreen.Business.Interfaces
 {
     public interface IConfigurationColumnRepository : IRepository<ConfigurationColumnModel>
     {
-        
+        ConfigurationColumnModel GetConfigurationColumnValues(int id);
     }
 }

@@ -13,5 +13,13 @@ namespace DynamicScreen.Data.Respository
         public ConfigurationRepository(Context db) : base(db)
         {
         }
+
+        public ConfigurationModel GetConfigurationColumnRows(int id)
+        {
+            return Db.Configurationn.AsNoTracking()
+                .Include("ConfigurationRow")
+                .Include("ConfigurationColumn")
+                .FirstOrDefault(a => a.Id == id);
+        }
     }
 }
