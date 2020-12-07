@@ -13,8 +13,8 @@ namespace DynamicScreen.Business.HardCode
         {
             var newConfiguration = new ConfigurationModel
             {
-                Name = "ValorPadrao",
-                Title = "Valores Padrões do Sistema",
+                Name = "TelaGeral",
+                Title = "Valores Gerais do Sistema",
                 Index = index,
                 Enable = true
             };
@@ -29,7 +29,8 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Title = "Código",
+                    Name = "EstruturaSecundariaIdealDefault",
+                    Title = "Estrutura ideal de BT",
                     Component = "TextBox",
                     Index = 0,
                     ReadOnly = true,
@@ -39,7 +40,8 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Title = "Chave",
+                    Name = "DistanciaTrechoSecundario",
+                    Title = "Distância máxima de trecho secundário",
                     Component = "TextBox",
                     Index = 1,
                     ReadOnly = false,
@@ -49,7 +51,8 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Title = "Valor",
+                    Name = "DistanciaMinimaEntrePostes",
+                    Title = "Distância mínima entre postes",
                     Component = "TextBox",
                     Index = 2,
                     ReadOnly = false,
@@ -59,8 +62,9 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Title = "Descrição",
-                    Component = "TextArea",
+                    Name = "EncurtamentoTrechoBT",
+                    Title = "Encurtamento de trecho de BT",
+                    Component = "TextBox",
                     Index = 3,
                     ReadOnly = false,
                     Group = null,
@@ -118,97 +122,25 @@ namespace DynamicScreen.Business.HardCode
                 {
                     RowPosition = 0,
                     ColumnPosition = 0,
-                    Value = "1"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 0,
-                    ColumnPosition = 1,
-                    Value = "EstruturaSecundariaIdealDefault"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 0,
-                    ColumnPosition = 2,
                     Value = "SI-1"
                 },
                 new ValuesDefault()
                 {
                     RowPosition = 0,
-                    ColumnPosition = 3,
-                    Value = "Define qual deve ser a estrutura secundária ideal que o sistema deve retornar."
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 1,
-                    ColumnPosition = 0,
-                    Value = "2"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 1,
                     ColumnPosition = 1,
-                    Value = "DistanciaTrechoSecundario"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 1,
-                    ColumnPosition = 2,
                     Value = "2,0"
                 },
                 new ValuesDefault()
                 {
-                    RowPosition = 1,
-                    ColumnPosition = 3,
-                    Value = "Define qual deve ser a distância entre um trecho primário e secundário, para que o trecho secundário não seja desenhado por cima do primário."
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 2,
-                    ColumnPosition = 0,
-                    Value = "3"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 2,
-                    ColumnPosition = 1,
-                    Value = "DistanciaMinimaEntrePostes"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 2,
+                    RowPosition = 0,
                     ColumnPosition = 2,
                     Value = "2"
                 },
                 new ValuesDefault()
                 {
-                    RowPosition = 2,
+                    RowPosition = 0,
                     ColumnPosition = 3,
-                    Value = "Define qual deve ser a distância mínima entre postes."
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 3,
-                    ColumnPosition = 0,
-                    Value = "4"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 3,
-                    ColumnPosition = 1,
-                    Value = "EncurtamentoTrechoBT"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 3,
-                    ColumnPosition = 2,
                     Value = "1,75"
-                },
-                new ValuesDefault()
-                {
-                    RowPosition = 3,
-                    ColumnPosition = 3,
-                    Value = "Define o encurtamento (metros) de ambos os lados do trecho secundário em relação ao vão dos postes."
                 }
             };
         }

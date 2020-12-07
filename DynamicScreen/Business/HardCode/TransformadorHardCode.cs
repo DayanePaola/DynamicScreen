@@ -29,6 +29,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "TensaoDeOperacao",
                     Title = "Tensão de Operação",
                     Component = "TextBox",
                     Index = 0,
@@ -39,6 +40,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "TipoDeFaseDeDestino",
                     Title = "Tipo de Fase de Destino",
                     Component = "DropDownList",
                     Index = 1,
@@ -49,6 +51,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "FaseDeOrigem",
                     Title = "Fase de Origem",
                     Component = "TextBox",
                     Index = 2,
@@ -59,6 +62,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Codigo",
                     Title = "Código",
                     Component = "TextBox",
                     Index = 3,
@@ -69,6 +73,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Visao",
                     Title = "Visão",
                     Component = "TextBox",
                     Index = 4,
@@ -79,6 +84,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Descricao",
                     Title = "Descrição",
                     Component = "TextArea",
                     Index = 5,
@@ -89,6 +95,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Potencia",
                     Title = "Potência",
                     Component = "TextBox",
                     Index = 6,
@@ -99,6 +106,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "AtivoNoPDN",
                     Title = "Ativo no PDN",
                     Component = "RadioButton",
                     Index = 7,
@@ -109,6 +117,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "CodigoDaChave",
                     Title = "Código da Chave",
                     Component = "TextBox",
                     Index = 8,
@@ -119,6 +128,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "CodigoDoElo",
                     Title = "Código do Elo",
                     Component = "TextBox",
                     Index = 9,
@@ -129,24 +139,6 @@ namespace DynamicScreen.Business.HardCode
             };
 
             return listColumns;
-        }
-
-        public IEnumerable<ConfigurationRowModel> CreateRows(int idConfiguration, int countRows)
-        {
-            var listRows = new List<ConfigurationRowModel>();
-
-            for (int i = 0; i < countRows; i++)
-            {
-                var novaLinha = new ConfigurationRowModel
-                {
-                    ConfigurationId = idConfiguration,
-                    Index = i
-                };
-
-                listRows.Add(novaLinha);
-            }
-
-            return listRows;
         }
     }
 }

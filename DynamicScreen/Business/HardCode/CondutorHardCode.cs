@@ -29,6 +29,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Codigo",
                     Title = "Código",
                     Component = "TextBox",
                     Index = 0,
@@ -39,6 +40,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Condutor",
                     Title = "Condutor",
                     Component = "TextBox",
                     Index = 1,
@@ -49,6 +51,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Codigo",
                     Title = "Código",
                     Component = "TextBox",
                     Index = 2,
@@ -59,6 +62,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Condutor",
                     Title = "Condutor",
                     Component = "TextBox",
                     Index = 3,
@@ -69,6 +73,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Codigo",
                     Title = "Código",
                     Component = "TextBox",
                     Index = 4,
@@ -79,6 +84,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Condutor",
                     Title = "Condutor",
                     Component = "TextBox",
                     Index = 5,
@@ -89,6 +95,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Codigo",
                     Title = "Código",
                     Component = "TextBox",
                     Index = 6,
@@ -99,6 +106,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Condutor",
                     Title = "Condutor",
                     Component = "TextBox",
                     Index = 7,
@@ -109,6 +117,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "LimiteDoVao",
                     Title = "Limite do Vão",
                     Component = "TextBox",
                     Index = 8,
@@ -119,6 +128,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "LimiteDoTramo",
                     Title = "Limite do Tramo",
                     Component = "TextBox",
                     Index = 9,
@@ -129,6 +139,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "TipoDaFase",
                     Title = "Tipo da Fase",
                     Component = "DropDownList",
                     Index = 10,
@@ -173,7 +184,7 @@ namespace DynamicScreen.Business.HardCode
                     {
                         ConfigurationColumnSourceId = columns[i].Id,
                         ConfigurationColumnDestinationId = columns[i + 1].Id,
-                        DestinationIndex = columns[i + 1].Index
+                        Method = null
                     });
                 }
             }

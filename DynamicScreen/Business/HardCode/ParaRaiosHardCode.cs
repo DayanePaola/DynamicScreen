@@ -29,6 +29,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Topologia",
                     Title = "Topologia",
                     Component = "DropDownList",
                     Index = 0,
@@ -39,6 +40,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Tensao",
                     Title = "Tensão",
                     Component = "DropDownList",
                     Index = 1,
@@ -49,6 +51,7 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
+                    Name = "Limite",
                     Title = "Limite",
                     Component = "DropDownList",
                     Index = 2,
@@ -59,24 +62,6 @@ namespace DynamicScreen.Business.HardCode
             };
 
             return listColumns;
-        }
-
-        public IEnumerable<ConfigurationRowModel> CreateRows(int idConfiguration, int countRows)
-        {
-            var listRows = new List<ConfigurationRowModel>();
-
-            for (int i = 0; i < countRows; i++)
-            {
-                var novaLinha = new ConfigurationRowModel
-                {
-                    ConfigurationId = idConfiguration,
-                    Index = i
-                };
-
-                listRows.Add(novaLinha);
-            }
-
-            return listRows;
         }
     }
 }
