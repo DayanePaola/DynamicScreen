@@ -95,7 +95,6 @@ namespace DynamicScreen.Business.HardCode
 
         private IEnumerable<ConfigurationColumnFillModel> CreateConfigurationColumnFill()
         {
-            //TODO: COMO FAZER?
             var listConfiguration = _configurationRepository.GetAll();
             var configuration = _configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Condutor")).Id);
 
@@ -121,7 +120,6 @@ namespace DynamicScreen.Business.HardCode
 
         private IEnumerable<ConfigurationValueModel> CreateConfigurationValues()
         {
-            //TODO: FODA
             var listConfiguration = _configurationRepository.GetAll();
             var configuration = _configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("TelaGeral")).Id);
 
