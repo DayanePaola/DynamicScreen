@@ -20,28 +20,34 @@ namespace DynamicScreen.Data.Respository
             DbSet = db.Set<TEntity>();
         }
 
-        public IEnumerable<TEntity> ObterTodos()
+        public IEnumerable<TEntity> GetAll()
         {
             return DbSet.AsNoTracking().ToList();
         }
 
-        public TEntity ObterPorId(int id)
+        public TEntity GetById(int id)
         {
             return DbSet.Find(id);
         }
 
-        public void Adicionar(TEntity entity)
+        public void Insert(TEntity entity)
         {
             DbSet.Add(entity);
             SaveChanges();
         }
 
-        public void Atualizar(TEntity entity)
+        public void InsertRange(IEnumerable<TEntity> entities)
+        {
+            DbSet.AddRange(entities);
+            SaveChanges();
+        }
+
+        public void Update(TEntity entity)
         {
             SaveChanges();
         }
 
-        public void Remover(int id)
+        public void Remove(int id)
         {
             DbSet.Remove(DbSet.Find(id));
             SaveChanges();

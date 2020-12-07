@@ -9,11 +9,12 @@ namespace DynamicScreen.Business.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : Entity
     {
-        void Adicionar(TEntity entity);
-        TEntity ObterPorId(int id);
-        IEnumerable<TEntity> ObterTodos();
-        void Atualizar(TEntity entity);
-        void Remover(int id);
+        void Insert(TEntity entity);
+        void InsertRange(IEnumerable<TEntity> entities);
+        TEntity GetById(int id);
+        IEnumerable<TEntity> GetAll();
+        void Update(TEntity entity);
+        void Remove(int id);
         int SaveChanges();
     }
 }
