@@ -17,6 +17,7 @@ namespace DynamicScreen
             InitializeComponent();
 
             var tab = AddTab("tabTeste", "XABLAU");
+            tab.SuspendLayout();
             var teste = new List<ComponentItemDto>(){
                 new ComponentItemDto() {
                     Components = ComponentAllowed.Text,
@@ -27,31 +28,51 @@ namespace DynamicScreen
                         new ConfigurationColumnDto { Id = 1, Index = 1, Title = "Código", Name = "codigo_xablau"},
                         new ConfigurationColumnDto { Id = 2, Index = 2, Title = "Descrição", Name = "desc_xablau"}
                     }
+                },
+                new ComponentItemDto() {
+                   Components = ComponentAllowed.Text,
+                   Group = "XPTO",
+                   Index = 1,
+                   ConfigurationColumns = new List<ConfigurationColumnDto> ()
+                   {
+                       new ConfigurationColumnDto { Id = 1, Index = 1, Title = "CampoXPTO", Name = "codigo_xpto"},
+                   }
+                },
+                new ComponentItemDto() {
+                   Components = ComponentAllowed.Text,
+                   Group = "XPTO",
+                   Index = 1,
+                   ConfigurationColumns = new List<ConfigurationColumnDto> ()
+                   {
+                       new ConfigurationColumnDto { Id = 1, Index = 1, Title = "CampoXPTO1", Name = "codigo_xpto1"},
+                   }
                 }
             };
             AddComponents(teste, tab);
+            tab.ResumeLayout();
         }
 
-        private TableLayoutPanel AddTab(string name, string text)
+        private TabPage AddTab(string name, string text)
         {
             TabPage tbp = new TabPage();
             tbp.Name = name;
             tbp.Text = text;
 
-            TableLayoutPanel tlp = new TableLayoutPanel();
-            tlp.Name = $"tlp_{name}";
-            tlp.AutoSize = true;
-            tlp.ColumnCount = 2;
-            tlp.RowCount = 0;
-            tlp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tlp.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            tbp.Controls.Add(tlp);
+            //TableLayoutPanel tlp = new TableLayoutPanel();
+            //tlp.Name = $"tlp_{name}";
+            //tlp.AutoSize = true;
+            //tlp.Dock = DockStyle.Fill;
+            //tlp.ColumnCount = 2;
+            //tlp.RowCount = 0;
+            //tlp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //tlp.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+            //tbp.Controls.Add(tlp);
             tabControl.TabPages.Add(tbp);
-
-            return tlp;
+            return tbp;
+            //return tlp;
         }
 
-        private void AddComponents(List<ComponentItemDto> configurationColumns, TableLayoutPanel tab)
+        private void AddComponents(List<ComponentItemDto> configurationColumns, TabPage tab)
         {
             configurationColumns.OrderBy(o => o.Index).ToList().ForEach(f =>
             {
@@ -60,13 +81,8 @@ namespace DynamicScreen
                     case ComponentAllowed.Text:
                         if (f.ConfigurationColumns.Count() > 1)
                         {
-                            GroupBox grp = new GroupBox();
-                            grp.SuspendLayout();
-                            grp.Text = f.Group;
-                            grp.Name = $"grp_{f.Group}";
-                            grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                            GroupBox grp = AddGroupBox(tab, f);
                             AddTextBox(tab, f, grp);
-                            tab.Controls.Add(grp);
                             grp.ResumeLayout(false);
                             break;
                         }
@@ -86,39 +102,55 @@ namespace DynamicScreen
             });
         }
 
-        private static void AddTextBox(TableLayoutPanel tab, ComponentItemDto f, GroupBox grp = null)
+        private static GroupBox AddGroupBox(TabPage tab, ComponentItemDto f)
+        {
+            GroupBox grp = new GroupBox();
+            grp.SuspendLayout();
+            grp.Text = f.Group;
+            grp.Dock = DockStyle.Top;
+            grp.Name = $"grp_{f.Group}";
+            grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tab.Controls.Add(grp);
+            return grp;
+        }
+
+        private static void AddTextBox(TabPage tab, ComponentItemDto f, GroupBox grp = null)
         {
             var position = 20;
             f.ConfigurationColumns.OrderBy(o => o.Index).ToList().ForEach(fo =>
             {
-                tab.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+                //tab.RowStyles.Add(new RowStyle(SizeType.Percent));
                 Label lbl = new Label();
                 lbl.Text = fo.Title;
                 lbl.AutoSize = true;
                 lbl.Name = $"lbl_{fo.Name}";
-                lbl.AutoSize = true;
-                lbl.Anchor = AnchorStyles.Top
-                           | AnchorStyles.Left;
-                lbl.Dock = DockStyle.Fill;
+                //lbl.AutoSize = true;
+                //lbl.Anchor = AnchorStyles.Top
+                //           | AnchorStyles.Left;
+                lbl.Dock = DockStyle.Top;
 
                 TextBox txt = new TextBox();
                 txt.Name = $"txt_{fo.Name}";
                 txt.TabIndex = fo.Index;
-                txt.Dock = DockStyle.Fill;
+                txt.Dock = DockStyle.Top;
                 txt.AutoSize = true;
-                txt.Anchor = AnchorStyles.Top
-                           | AnchorStyles.Right;
-
-                tab.RowCount++;
+                //txt.Anchor = AnchorStyles.Left
+                //           | AnchorStyles.Right;
 
                 if (grp != null)
                 {
                     lbl.Location = new System.Drawing.Point(20, position);
                     txt.Location = new System.Drawing.Point(80, position);
                     position += 40;
-                    grp.Controls.Add(lbl);
                     grp.Controls.Add(txt);
+                    grp.Controls.Add(lbl);
                 }
+                else
+                {
+                    tab.Controls.Add(txt);
+                    tab.Controls.Add(lbl);
+                }
+                //tab.RowCount++;
             });
         }
     }
