@@ -48,5 +48,10 @@ namespace DynamicScreen.View
                                                           && (string.IsNullOrWhiteSpace(txt_description.Text) 
                                                              ||  w.Description.ToUpper().Contains(txt_description.Text.ToUpper()))).ToList();
         }
+
+        private void dgv_search_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

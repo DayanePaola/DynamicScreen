@@ -108,8 +108,12 @@
     <Compile Include="Data\Respository\ConfigurationRepository.cs" />
     <Compile Include="Data\Respository\ConfigurationValueRepository.cs" />
     <Compile Include="Data\Respository\Repository.cs" />
-    <Compile Include="Dto\BaseSearchDto.cs" />
-    <Compile Include="Dto\SearchDto.cs" />
+    <Compile Include="Dto\ComponentItemDto.cs" />
+    <Compile Include="Dto\ConfigurationColumnDto.cs" />
+    <Compile Include="Dto\ConfigurationRowDto.cs" />
+    <Compile Include="Dto\ConfigurationTabDto.cs" />
+    <Compile Include="Dto\ConfigurationValueDto.cs" />
+    <Compile Include="Dto\ValueDto.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,8 +123,17 @@
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dto\BaseSearchDto.cs" />
+    <Compile Include="Dto\SearchDto.cs" />
+    <Compile Include="Enums\ComponentAllowed.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\MainForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm1.Designer.cs">
+      <DependentUpon>MainForm1.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Data\Migrations\202011150113368_InitialDb.cs" />
@@ -172,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\GenericSearch.resx">
       <DependentUpon>GenericSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainForm1.resx">
+      <DependentUpon>MainForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
