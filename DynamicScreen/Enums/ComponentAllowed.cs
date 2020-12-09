@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DynamicScreen.Enums
 {
-    public enum Components
+    public enum ComponentAllowed
     {
-        Text,
+        Text, 
+        TextArea,
         Check,
         SeachModal,
         Radio,

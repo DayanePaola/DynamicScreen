@@ -1,6 +1,6 @@
 ﻿namespace DynamicScreen
 {
-    partial class MainForm
+    partial class MainForm1
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -39,13 +39,13 @@
             this.tabControl.Size = new System.Drawing.Size(776, 426);
             this.tabControl.TabIndex = 0;
             // 
-            // MainForm
+            // MainForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl);
-            this.Name = "MainForm";
+            this.Name = "MainForm1";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
