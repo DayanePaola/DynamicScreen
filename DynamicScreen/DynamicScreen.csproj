@@ -75,6 +75,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\HardCode\InitialDataBase.cs" />
+    <Compile Include="Business\HardCode\ChaveHardCode.cs" />
+    <Compile Include="Business\HardCode\CondutorHardCode.cs" />
+    <Compile Include="Business\HardCode\EstruturaSecundariaHardCode.cs" />
+    <Compile Include="Business\HardCode\ObstaculoHardCode.cs" />
+    <Compile Include="Business\HardCode\ValorPadraoHardCode.cs" />
+    <Compile Include="Business\HardCode\TransformadorHardCode.cs" />
+    <Compile Include="Business\HardCode\ParaRaiosHardCode.cs" />
+    <Compile Include="Business\HardCode\ValuesDefault.cs" />
     <Compile Include="Business\Interfaces\IConfigurationColumnFillRepository.cs" />
     <Compile Include="Business\Interfaces\IConfigurationRowRepository.cs" />
     <Compile Include="Business\Interfaces\IConfigurationRepository.cs" />
@@ -135,6 +144,10 @@
     <Compile Include="Data\Migrations\202012022245431_AddIndexConfigurationModel.designer.cs">
       <DependentUpon>202012022245431_AddIndexConfigurationModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012071826108_AddMethodColumnFil.cs" />
+    <Compile Include="Migrations\202012071826108_AddMethodColumnFil.designer.cs">
+      <DependentUpon>202012071826108_AddMethodColumnFil.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Form1.cs">
@@ -154,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Migrations\202012022245431_AddIndexConfigurationModel.resx">
       <DependentUpon>202012022245431_AddIndexConfigurationModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012071826108_AddMethodColumnFil.resx">
+      <DependentUpon>202012071826108_AddMethodColumnFil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -187,7 +203,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Pesquisar16x16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

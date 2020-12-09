@@ -6,6 +6,7 @@ namespace DynamicScreen.Data.Models
     {
         public int ConfigurationId { get; set; }
         public string Group { get; set; }
+        public string Name { get; set; }
         public string Title { get; set; }
         public string Method { get; set; }
         public int Index { get; set; }
