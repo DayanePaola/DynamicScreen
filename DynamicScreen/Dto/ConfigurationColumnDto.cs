@@ -8,6 +8,7 @@ namespace DynamicScreen.Dto
         public int Id { get; set; }
         public string Title { get; set; }
         public string Name { get; set; }
+        public bool ReadOnly { get; set; }
         public List<ValueDto> EnableValues { get; set; }
     }
 }
