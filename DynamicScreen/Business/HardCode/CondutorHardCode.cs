@@ -183,8 +183,7 @@ namespace DynamicScreen.Business.HardCode
                     listFill.Add(new ConfigurationColumnFillModel
                     {
                         ConfigurationColumnSourceId = columns[i].Id,
-                        ConfigurationColumnDestinationId = columns[i + 1].Id,
-                        Method = null
+                        ConfigurationColumnDestinationId = columns[i + 1].Id
                     });
                 }
             }
