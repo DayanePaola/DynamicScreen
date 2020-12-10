@@ -42,19 +42,19 @@ namespace DynamicScreen.Business.HardCode
             if (_configurationRepository.GetAll().Count() == 0)
             {
                 var listConfiguration = CreateConfiguration();
-                Console.WriteLine($"Quatidade de configurações criadas: {listConfiguration.Count()}");
+                Console.WriteLine($"Quantidade de configurações criadas: {listConfiguration.Count()}");
                 
                 var listConfigurationColumn = CreateConfigurationColumn();
-                Console.WriteLine($"Quatidade de colunas criadas: {listConfigurationColumn.Count()}");
+                Console.WriteLine($"Quantidade de colunas criadas: {listConfigurationColumn.Count()}");
                 
                 var listConfigurationColumnFill = CreateConfigurationColumnFill();
-                Console.WriteLine($"Quatidade de preenchimentos criados: {listConfigurationColumnFill.Count()}");
+                Console.WriteLine($"Quantidade de preenchimentos criados: {listConfigurationColumnFill.Count()}");
                 
                 var listConfigurationRow = CreateConfigurationRows();
-                Console.WriteLine($"Quatidade de linhas criadas: {listConfigurationRow.Count()}");
+                Console.WriteLine($"Quantidade de linhas criadas: {listConfigurationRow.Count()}");
                 
                 var listConfigurationValue = CreateConfigurationValues();
-                Console.WriteLine($"Quatidade de valores criadas: {listConfigurationValue.Count()}");
+                Console.WriteLine($"Quantidade de valores criadas: {listConfigurationValue.Count()}");
             }
         }
 

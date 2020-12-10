@@ -35,7 +35,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 0,
                     ReadOnly = false,
                     Group = null,
-                    Method = null
+                    Method = "ObterListaDeTopologias"
                 },
                 new ConfigurationColumnModel
                 {
