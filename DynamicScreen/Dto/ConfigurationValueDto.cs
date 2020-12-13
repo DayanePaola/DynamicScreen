@@ -2,7 +2,10 @@
 {
     public class ConfigurationValueDto
     {
-        public ConfigurationColumnDto Column { get; set; }
+        public int Id { get; set; }
+        public int ConfigurationColumnId { get; set; }
+        public int ConfigurationRowId { get; set; }
         public string Value { get; set; }
+        public ConfigurationColumnDto Column { get; set; }
     }
 }

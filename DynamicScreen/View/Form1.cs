@@ -1,4 +1,9 @@
-﻿using DynamicScreen.Dto;
+﻿using AutoMapper;
+using DynamicScreen.Business.Interfaces;
+using DynamicScreen.Data;
+using DynamicScreen.Data.Models;
+using DynamicScreen.Data.Respository;
+using DynamicScreen.Dto;
 using DynamicScreen.View;
 using System;
 using System.Collections.Generic;
@@ -14,7 +19,7 @@ namespace DynamicScreen
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public Form1(Context context)
         {
             InitializeComponent();
             AddTab();
@@ -22,6 +27,7 @@ namespace DynamicScreen
 
         void AddTab()
         {
+
             TabPage tbp = new TabPage();
             tbp.Name = "tb_cabo";
             tbp.Text = "Condutores";

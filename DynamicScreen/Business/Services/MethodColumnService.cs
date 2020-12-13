@@ -3,6 +3,7 @@ using DynamicScreen.Business.Interfaces;
 using DynamicScreen.Data;
 using DynamicScreen.Data.Models;
 using DynamicScreen.Data.Respository;
+using DynamicScreen.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,39 +13,53 @@ using System.Threading.Tasks;
 
 namespace DynamicScreen.Business.Services
 {
-    public class MethodColumnService : IMethodColumnService
+    public class MethodColumnService
     {
         private readonly IColumnMethod _columnMethod;
-        private readonly IConfigurationColumnRepository _configurationColumnRepository;
 
-        public MethodColumnService(Context db)
+        public MethodColumnService()
         {
             _columnMethod = new ColumnMethodHardCode();
-            _configurationColumnRepository = new ConfigurationColumnRepository(db);
         }
 
-        public IEnumerable<Topologia> ExecuteMethodColumnByConfiguration(int idConfiguration)
+        public IEnumerable<ValueDto> ExecuteMethod(string method)
         {
+            if (string.IsNullOrWhiteSpace(method))
+                return new List<ValueDto>();
+
             var typeClassMethod = _columnMethod.GetType();
             ConstructorInfo constructor = typeClassMethod.GetConstructor(Type.EmptyTypes);
             object classObject = constructor.Invoke(new object[] { });
 
-            var columnModel = GetColumn(idConfiguration);
-            if (columnModel == null)
-                return null;
-
-            var methodInfo = typeClassMethod.GetMethod(columnModel.Method);
+            var methodInfo = typeClassMethod.GetMethod(method);
 
             var retorno = methodInfo.Invoke(classObject, null);
 
-            return retorno as IEnumerable<Topologia>;
+            return retorno as IEnumerable<ValueDto>;
         }
 
-        private ConfigurationColumnModel GetColumn(int idConfiguration)
-        {
-            var columnModel = _configurationColumnRepository.GetAll().FirstOrDefault(a => a.ConfigurationId == idConfiguration && !string.IsNullOrWhiteSpace(a.Method));
+        //public IEnumerable<Topologia> ExecuteMethodColumnByConfiguration(int idConfiguration)
+        //{
+        //    var typeClassMethod = _columnMethod.GetType();
+        //    ConstructorInfo constructor = typeClassMethod.GetConstructor(Type.EmptyTypes);
+        //    object classObject = constructor.Invoke(new object[] { });
 
-            return columnModel;
-        }
+        //    var columnModel = GetColumn(idConfiguration);
+        //    if (columnModel == null)
+        //        return null;
+
+        //    var methodInfo = typeClassMethod.GetMethod(columnModel.Method);
+
+        //    var retorno = methodInfo.Invoke(classObject, null);
+
+        //    return retorno as IEnumerable<Topologia>;
+        //}
+
+        //private ConfigurationColumnModel GetColumn(int idConfiguration)
+        //{
+        //    var columnModel = _configurationColumnRepository.GetAll().FirstOrDefault(a => a.ConfigurationId == idConfiguration && !string.IsNullOrWhiteSpace(a.Method));
+
+        //    return columnModel;
+        //}
     }
 }

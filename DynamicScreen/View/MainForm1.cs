@@ -1,5 +1,9 @@
-﻿using DynamicScreen.Data;
+﻿using AutoMapper;
+using DynamicScreen.Business.AutoMapper;
+using DynamicScreen.Business.Interfaces;
+using DynamicScreen.Data;
 using DynamicScreen.Data.Models;
+using DynamicScreen.Data.Respository;
 using DynamicScreen.Dto;
 using DynamicScreen.Enums;
 using System;
@@ -12,9 +16,26 @@ namespace DynamicScreen
 {
     public partial class MainForm1 : Form
     {
-        public MainForm1()
+        private readonly IMapper _mapper;
+        private readonly Context _context;
+        private readonly IConfigurationRepository _configurationRepository;
+        public MainForm1(Context context)
         {
+            _mapper = new Mapper(ConfigurationMapper.MapperConfiguration());
+            _context = context;
+            _configurationRepository = new ConfigurationRepository(_context);
             InitializeComponent();
+
+            //Exemplo de como fazer o mapping
+            var listaConfiguracao = _configurationRepository.GetAll();
+            var configurationModel = listaConfiguracao.FirstOrDefault();
+            var configurationModel2 = _configurationRepository.GetConfigurationColumnRows(configurationModel.Id);
+
+
+            //De Model para DTO
+            var configurationTabDto = _mapper.Map<ConfigurationTabDto>(configurationModel2);
+            //De DTO para Model
+            var newConfigurationModel = _mapper.Map<ConfigurationModel>(configurationTabDto);
 
             var tab = AddTab("tabTeste", "XABLAU");
             tab.SuspendLayout();

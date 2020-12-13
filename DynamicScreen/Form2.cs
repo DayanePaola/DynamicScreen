@@ -20,39 +20,41 @@ namespace DynamicScreen
 {
     public partial class Form2 : Form
     {
-        private readonly IConfigurationRepository _configurationRepository;
-        private readonly IMethodColumnService _methodColumnService;
+        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationColumnService _configurationColumnService;
+        private readonly IConfigurationRowService _configurationRowService;
+        private readonly IConfigurationValueService _configurationValueService;
 
         public Form2(Context db)
         {
             InitializeComponent();
 
-            _configurationRepository = new ConfigurationRepository(db);
-            _methodColumnService = new MethodColumnService(db);
+            _configurationService = new ConfigurationService(db);
+            _configurationColumnService = new ConfigurationColumnService(db);
+            _configurationRowService = new ConfigurationRowService(db);
+            _configurationValueService = new ConfigurationValueService(db);
 
             new InitialDataBase(db);
 
-            var configurations = _configurationRepository.GetAll();
-
-            var retornoTopologia = "Lista de Topologia";
-
-            foreach (var item in configurations)
+            var configurationsDto = _configurationService.GetAllConfigurationsDto();
+            foreach (var item in configurationsDto)
             {
-                var configuration = _configurationRepository.GetConfigurationColumnRows(item.Id);
+                var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
 
-                var objeto = _methodColumnService.ExecuteMethodColumnByConfiguration(item.Id);
+                var rowsDto = _configurationRowService.GetRowsByConfigurationDto(item.Id);
+                var columnsDto = _configurationColumnService.GetColumnsByConfigurationDto(item.Id);
 
-                if (objeto != null && objeto.Count() > 0)
+
+                foreach (var row in rowsDto)
                 {
-                    foreach (var item2 in objeto)
+                    var valuesRowDto = _configurationValueService.GetValuesByRow(row.Id);
+                    foreach (var col in columnsDto)
                     {
-                        retornoTopologia += $"\nTopologia: {item2.Codigo} - {item2.Descricao}";
+                        var valuesColumnDto = _configurationValueService.GetValuesByColumn(col.Id);
+                        var valueDto = _configurationValueService.GetValeuByColumnRow(col.Id, row.Id);
                     }
                 }
             }
-
-
-            MessageBox.Show(retornoTopologia, "Método do Column", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

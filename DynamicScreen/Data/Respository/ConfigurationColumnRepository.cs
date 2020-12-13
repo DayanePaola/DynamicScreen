@@ -14,6 +14,12 @@ namespace DynamicScreen.Data.Respository
         {
         }
 
+        public IEnumerable<ConfigurationColumnModel> GetColumnsByConfiguration(int idConfiguration)
+        {
+            return Db.ConfigurationColumn.AsNoTracking()
+                .Where(a => a.ConfigurationId == idConfiguration);
+        }
+
         public ConfigurationColumnModel GetConfigurationColumnValues(int id)
         {
             return Db.ConfigurationColumn.AsNoTracking()
