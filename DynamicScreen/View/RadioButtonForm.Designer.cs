@@ -1,7 +1,7 @@
 ﻿
-namespace DynamicScreen
+namespace DynamicScreen.View
 {
-    partial class Form2
+    partial class RadioButtonForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,32 +29,12 @@ namespace DynamicScreen
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 450);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // Form2
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "Form2";
-            this.Text = "Form2";
-            this.ResumeLayout(false);
-
+            this.Text = "CheckboxForm";
         }
 
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl1;
     }
 }

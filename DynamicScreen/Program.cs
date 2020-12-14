@@ -20,7 +20,8 @@ namespace DynamicScreen
             new InitialDataBase(_context);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm(_context));
+            //Application.Run(new MainForm(_context));
+            Application.Run(new Form2(_context));
         }
     }
 }

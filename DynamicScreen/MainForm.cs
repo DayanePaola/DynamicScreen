@@ -9,7 +9,7 @@ namespace DynamicScreen
         {
             InitializeComponent();
 
-            Application.Run(new Form2(context));
+            
         }
     }
 }
