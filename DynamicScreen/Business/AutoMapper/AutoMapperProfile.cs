@@ -25,7 +25,7 @@ namespace DynamicScreen.Business.AutoMapper
                 conf.AddProfile<AutoMapperProfile>();
                 
                 conf.CreateMap<ConfigurationModel, ConfigurationTabDto>()
-                .ForMember(dest => dest.ComponentItems, opt => opt.Ignore())
+                .ForMember(dest => dest.RowId, opt => opt.Ignore())
                 .ForMember(dest => dest.ConfigurationRow, opt => opt.MapFrom(src => src.ConfigurationRow))
                 .ForMember(dest => dest.ConfigurationColumn, opt => opt.MapFrom(src => src.ConfigurationColumn));
 

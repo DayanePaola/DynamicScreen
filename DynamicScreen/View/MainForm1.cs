@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DynamicScreen.Business.AutoMapper;
 using DynamicScreen.Business.Interfaces;
+using DynamicScreen.Business.Services;
 using DynamicScreen.Data;
 using DynamicScreen.Data.Models;
 using DynamicScreen.Data.Respository;
@@ -16,163 +17,166 @@ namespace DynamicScreen
 {
     public partial class MainForm1 : Form
     {
-        private readonly IMapper _mapper;
-        private readonly Context _context;
-        private readonly IConfigurationRepository _configurationRepository;
-        public MainForm1(Context context)
+        private readonly IConfigurationService _configurationService;
+        private readonly IConfigurationColumnService _configurationColumnService;
+        private readonly IConfigurationRowService _configurationRowService;
+        private readonly IConfigurationValueService _configurationValueService;
+
+        public MainForm1(Context db)
         {
-            _mapper = new Mapper(ConfigurationMapper.MapperConfiguration());
-            _context = context;
-            _configurationRepository = new ConfigurationRepository(_context);
             InitializeComponent();
 
-            //Exemplo de como fazer o mapping
-            var listaConfiguracao = _configurationRepository.GetAll();
-            var configurationModel = listaConfiguracao.FirstOrDefault();
-            var configurationModel2 = _configurationRepository.GetConfigurationColumnRows(configurationModel.Id);
+            _configurationService = new ConfigurationService(db);
+            _configurationColumnService = new ConfigurationColumnService(db);
+            _configurationRowService = new ConfigurationRowService(db);
+            _configurationValueService = new ConfigurationValueService(db);
 
+            var configurationsDto = _configurationService.GetAllConfigurationsDto();
+            foreach (var item in configurationsDto)
+            {
+                var tab = AddTab(item);
+                Button btn = new Button();
+                btn.Parent = tab;
+                btn.Name = $"btn_salvar_{item.Id}";
+                btn.Text = "Salvar";
+                btn.Dock = DockStyle.Top;
+                btn.Click += (object sender, EventArgs e) =>
+                {
+                    Salvar(item, tab);
+                };
 
-            //De Model para DTO
-            var configurationTabDto = _mapper.Map<ConfigurationTabDto>(configurationModel2);
-            //De DTO para Model
-            var newConfigurationModel = _mapper.Map<ConfigurationModel>(configurationTabDto);
+                SetComponents(item, tab);
+            }
+        }
 
-            var tab = AddTab("tabTeste", "XABLAU");
+        private void Salvar(ConfigurationTabDto item, TabPage tab)
+        {
+            var configValues = new List<ConfigurationValueDto>();
+            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
+            foreach (var col in configurationDto.ConfigurationColumn)
+            {
+                var component = tab.Controls.Find($"{col.Name}_{col.Id}", true).FirstOrDefault();
+                var value = new ConfigurationValueDto()
+                {
+                    ConfigurationColumnId = col.Id,
+                    Value = component.Text,
+                    ConfigurationRowId = item.RowId
+                };
+                configValues.Add(value);
+            }
+            _configurationValueService.InsertRangeValuesDto(item.Id, item.RowId, configValues);
+        }
+
+        private void SetComponents(ConfigurationTabDto item, TabPage tab)
+        {
             tab.SuspendLayout();
-            var teste = new List<ComponentItemDto>(){
-                new ComponentItemDto() {
-                    Components = ComponentAllowed.TextBox,
-                    Group = "xablauzinho",
-                    Index = 1,
-                    ConfigurationColumns = new List<ConfigurationColumnDto> ()
-                    {
-                        new ConfigurationColumnDto { Id = 1, Index = 1, Title = "Código", Name = "codigo_xablau"},
-                        new ConfigurationColumnDto { Id = 2, Index = 2, Title = "Descrição", Name = "desc_xablau"}
-                    }
-                },
-                new ComponentItemDto() {
-                   Components = ComponentAllowed.TextBox,
-                   Group = "XPTO",
-                   Index = 1,
-                   ConfigurationColumns = new List<ConfigurationColumnDto> ()
-                   {
-                       new ConfigurationColumnDto { Id = 1, Index = 1, Title = "CampoXPTO", Name = "codigo_xpto"},
-                   }
-                },
-                new ComponentItemDto() {
-                   Components = ComponentAllowed.TextBox,
-                   Group = "XPTO",
-                   Index = 1,
-                   ConfigurationColumns = new List<ConfigurationColumnDto> ()
-                   {
-                       new ConfigurationColumnDto { Id = 1, Index = 1, Title = "CampoXPTO1", Name = "codigo_xpto1"},
-                   }
-                }
-            };
-            AddComponents(teste, tab);
+            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
+            AddComponents(configurationDto, tab);
             tab.ResumeLayout();
         }
 
-        private TabPage AddTab(string name, string text)
+        private TabPage AddTab(ConfigurationTabDto item)
         {
             TabPage tbp = new TabPage();
-            tbp.Name = name;
-            tbp.Text = text;
-
-            //TableLayoutPanel tlp = new TableLayoutPanel();
-            //tlp.Name = $"tlp_{name}";
-            //tlp.AutoSize = true;
-            //tlp.Dock = DockStyle.Fill;
-            //tlp.ColumnCount = 2;
-            //tlp.RowCount = 0;
-            //tlp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            //tlp.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            //tbp.Controls.Add(tlp);
+            tbp.Name = item.Name;
+            tbp.Text = item.Title;
             tabControl.TabPages.Add(tbp);
             return tbp;
-            //return tlp;
         }
 
-        private void AddComponents(List<ComponentItemDto> configurationColumns, TabPage tab)
+        private void AddComponents(ConfigurationTabDto config, TabPage tab)
         {
-            configurationColumns.OrderBy(o => o.Index).ToList().ForEach(f =>
+            config.ConfigurationColumn
+                  .OrderByDescending(o => o.Index)
+                  .GroupBy(g => g.Group)
+                  .Select(s => new ComponentItemDto()
+                  {
+                      Group = s.Key,
+                      ConfigurationColumns = s.ToList(),
+                      SearchModal = s.Any(a => a.Component == ComponentAllowed.SeachModal)
+                  })
+                  .ToList()
+                  .ForEach(f =>
+                  {
+
+
+                      f.ConfigurationColumns.ForEach(fo =>
+                      {
+                          switch (fo.Component)
+                          {
+                              case ComponentAllowed.TextBox:
+                                  AddTextBox(tab, f);
+                                  break;
+                              case ComponentAllowed.RadioButton:
+                                  break;
+                              case ComponentAllowed.CheckBox:
+                                  break;
+                              case ComponentAllowed.SeachModal:
+                                  break;
+                              case ComponentAllowed.DropDownList:
+                                  break;
+                              default:
+                                  break;
+                          }
+                      });
+
+                  });
+        }
+
+        private static Control AddControl(TabPage tab, ComponentItemDto f)
+        {
+            if (f.ConfigurationColumns.Count > 1)
             {
-                switch (f.Components)
+                var group_find = tab.Controls.Find($"grp_{f.Group}", true).FirstOrDefault();
+                if (group_find != null)
                 {
-                    case ComponentAllowed.TextBox:
-                        if (f.ConfigurationColumns.Count() > 1)
-                        {
-                            GroupBox grp = AddGroupBox(tab, f);
-                            AddTextBox(tab, f, grp);
-                            grp.ResumeLayout(false);
-                            break;
-                        }
-                        AddTextBox(tab, f);
-                        break;
-                    case ComponentAllowed.RadioButton:
-                        break;
-                    case ComponentAllowed.CheckBox:
-                        break;
-                    case ComponentAllowed.SeachModal:
-                        break;
-                    case ComponentAllowed.DropDownList:
-                        break;
-                    default:
-                        break;
+                    return group_find;
                 }
-            });
+
+                GroupBox grp = new GroupBox();
+                grp.SuspendLayout();
+                grp.Text = f.Group;
+                grp.Dock = DockStyle.Top;
+                grp.Name = $"grp_{f.Group}";
+                grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                tab.Controls.Add(grp);
+                return grp;
+            }
+
+            var panel = new Panel();
+            panel.SuspendLayout();
+            panel.Name = $"pnl_{f.Index}";
+            panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            panel.Dock = DockStyle.Top;
+            tab.Controls.Add(panel);
+            return panel;
         }
 
-        private static GroupBox AddGroupBox(TabPage tab, ComponentItemDto f)
+        private static void AddTextBox(TabPage tab, ComponentItemDto f)
         {
-            GroupBox grp = new GroupBox();
-            grp.SuspendLayout();
-            grp.Text = f.Group;
-            grp.Dock = DockStyle.Top;
-            grp.Name = $"grp_{f.Group}";
-            grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tab.Controls.Add(grp);
-            return grp;
-        }
-
-        private static void AddTextBox(TabPage tab, ComponentItemDto f, GroupBox grp = null)
-        {
+            var control = AddControl(tab, f);
             var position = 20;
-            f.ConfigurationColumns.OrderBy(o => o.Index).ToList().ForEach(fo =>
+            f.ConfigurationColumns.OrderByDescending(o => o.Index).ToList().ForEach(fo =>
             {
-                //tab.RowStyles.Add(new RowStyle(SizeType.Percent));
                 Label lbl = new Label();
                 lbl.Text = fo.Title;
                 lbl.AutoSize = true;
-                lbl.Name = $"lbl_{fo.Name}";
-                //lbl.AutoSize = true;
-                //lbl.Anchor = AnchorStyles.Top
-                //           | AnchorStyles.Left;
-                lbl.Dock = DockStyle.Top;
+                lbl.Name = $"lbl_{fo.Name}_{fo.Id}";
+                lbl.Parent = control;
 
                 TextBox txt = new TextBox();
-                txt.Name = $"txt_{fo.Name}";
+                txt.Name = $"{fo.Name}_{fo.Id}";
                 txt.TabIndex = fo.Index;
-                txt.Dock = DockStyle.Top;
                 txt.AutoSize = true;
-                //txt.Anchor = AnchorStyles.Left
-                //           | AnchorStyles.Right;
+                txt.Parent = control;
 
-                if (grp != null)
-                {
-                    lbl.Location = new System.Drawing.Point(20, position);
-                    txt.Location = new System.Drawing.Point(80, position);
-                    position += 40;
-                    grp.Controls.Add(txt);
-                    grp.Controls.Add(lbl);
-                }
-                else
-                {
-                    tab.Controls.Add(txt);
-                    tab.Controls.Add(lbl);
-                }
-                //tab.RowCount++;
+                lbl.Location = new System.Drawing.Point(20, position);
+                txt.Location = new System.Drawing.Point(lbl.Width + 20, position);
+                position += 40;
+                control.Controls.Add(lbl);
+                control.Controls.Add(txt);
             });
+            control.ResumeLayout(false);
         }
     }
 }

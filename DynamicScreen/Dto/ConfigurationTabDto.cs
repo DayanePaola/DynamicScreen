@@ -14,6 +14,6 @@ namespace DynamicScreen.Dto
         public string Title { get; set; }
         public ICollection<ConfigurationRowDto> ConfigurationRow { get; set; }
         public ICollection<ConfigurationColumnDto> ConfigurationColumn { get; set; }
-        public List<ComponentItemDto> ComponentItems { get; set; }
+        public int RowId { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace DynamicScreen
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new MainForm(_context));
-            Application.Run(new Form2(_context));
+            Application.Run(new MainForm1(_context));
         }
     }
 }
