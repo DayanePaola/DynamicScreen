@@ -17,6 +17,48 @@ namespace DynamicScreen.Business.HardCode.Methods
             return MapTopologiaToValueDto(topologia);
         }
 
+        public IEnumerable<ValueDto> ObterRadioStatus()
+        {
+            var valueDtos = new List<ValueDto>()
+            {
+                new ValueDto
+                {
+                    Id = "true",
+                    Value = "Ativo"
+                },
+                new ValueDto
+                {
+                    Id = "false",
+                    Value = "Inativo"
+                }
+            };
+
+            return valueDtos;
+        }
+        public IEnumerable<ValueDto> ObterVelocidadeDoVento()
+        {
+            var valueDtos = new List<ValueDto>()
+            {
+                new ValueDto
+                {
+                    Id = "60",
+                    Value = "60km/h"
+                },
+                new ValueDto
+                {
+                    Id = "80",
+                    Value = "80km/h"
+                },
+                new ValueDto
+                {
+                    Id = "100",
+                    Value = "100km/h"
+                }
+            };
+
+            return valueDtos;
+        }
+
         private IEnumerable<ValueDto> MapTopologiaToValueDto(IEnumerable<Topologia> topologias)
         {
             foreach (var item in topologias)

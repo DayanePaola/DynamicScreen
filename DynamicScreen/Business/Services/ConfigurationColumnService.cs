@@ -22,6 +22,11 @@ namespace DynamicScreen.Business.Services
             _mapper = new Mapper(ConfigurationMapper.MapperConfiguration());
         }
 
+        public ConfigurationColumnDto GetColumnDtoById(int idColumn)
+        {
+            return _mapper.Map<ConfigurationColumnDto>(_configurationColumnRepository.GetById(idColumn));
+        }
+
         public IEnumerable<ConfigurationColumnDto> GetColumnsByConfigurationDto(int idConfiguration)
         {
             return _mapper.Map<IEnumerable<ConfigurationColumnDto>>(_configurationColumnRepository.GetColumnsByConfiguration(idConfiguration));

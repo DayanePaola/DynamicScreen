@@ -2,6 +2,7 @@
 using DynamicScreen.Business.AutoMapper;
 using DynamicScreen.Business.Interfaces;
 using DynamicScreen.Data;
+using DynamicScreen.Data.Models;
 using DynamicScreen.Data.Respository;
 using DynamicScreen.Dto;
 using System;

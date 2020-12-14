@@ -1,10 +1,14 @@
-﻿using DynamicScreen.Business.HardCode;
+﻿using DynamicScreen.Business.Forms;
+using DynamicScreen.Business.HardCode;
 using DynamicScreen.Business.HardCode.Methods;
 using DynamicScreen.Business.Interfaces;
 using DynamicScreen.Business.Services;
 using DynamicScreen.Data;
 using DynamicScreen.Data.Models;
 using DynamicScreen.Data.Respository;
+using DynamicScreen.Dto;
+using DynamicScreen.Enums;
+using DynamicScreen.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,9 +38,9 @@ namespace DynamicScreen
             _configurationRowService = new ConfigurationRowService(db);
             _configurationValueService = new ConfigurationValueService(db);
 
-            new InitialDataBase(db);
-
             var configurationsDto = _configurationService.GetAllConfigurationsDto();
+            var tabPage = new TabPage();
+
             foreach (var item in configurationsDto)
             {
                 var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
@@ -44,17 +48,25 @@ namespace DynamicScreen
                 var rowsDto = _configurationRowService.GetRowsByConfigurationDto(item.Id);
                 var columnsDto = _configurationColumnService.GetColumnsByConfigurationDto(item.Id);
 
-
-                foreach (var row in rowsDto)
+                tabPage = new TabPage
                 {
-                    var valuesRowDto = _configurationValueService.GetValuesByRow(row.Id);
-                    foreach (var col in columnsDto)
-                    {
-                        var valuesColumnDto = _configurationValueService.GetValuesByColumn(col.Id);
-                        var valueDto = _configurationValueService.GetValeuByColumnRow(col.Id, row.Id);
-                    }
-                }
+                    Name = $"{configurationDto.Name}",
+                    Text = $"{configurationDto.Title}"
+                };
+
+                tabPage.SuspendLayout();
+
+                //foreach (var col in columnsDto)
+                //{
+                //    ComboBoxFormService.GetComponent(col, tabPage);
+                //    RadioButonFormService.GetComponent(col, tabPage);
+                //    CheckBoxFormService.GetComponent(col, tabPage);
+                //}
+
+                tabPage.ResumeLayout();
+                tabControl1.Controls.Add(tabPage);
             }
         }
+
     }
 }

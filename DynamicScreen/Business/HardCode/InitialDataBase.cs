@@ -21,6 +21,7 @@ namespace DynamicScreen.Business.HardCode
         private readonly EstruturaSecundariaHardCode EstruturaSecundariaHardCode;
         private readonly ObstaculoHardCode ObstaculoHardCode;
         private readonly TransformadorHardCode TransformadorHardCode;
+        private readonly TopologiaHardCode TopologiaHardCode;
         private readonly ValorPadraoHardCode ValorPadraoHardCode;
         public InitialDataBase(Context context)
         {
@@ -35,6 +36,7 @@ namespace DynamicScreen.Business.HardCode
             EstruturaSecundariaHardCode = new EstruturaSecundariaHardCode();
             ObstaculoHardCode = new ObstaculoHardCode();
             TransformadorHardCode = new TransformadorHardCode();
+            TopologiaHardCode = new TopologiaHardCode();
             ValorPadraoHardCode = new ValorPadraoHardCode();
 
             ClearDataBase();
@@ -68,7 +70,8 @@ namespace DynamicScreen.Business.HardCode
                 EstruturaSecundariaHardCode.CreateConfiguration(3),
                 ObstaculoHardCode.CreateConfiguration(4),
                 TransformadorHardCode.CreateConfiguration(5),
-                ValorPadraoHardCode.CreateConfiguration(6)
+                TopologiaHardCode.CreateConfiguration(5),
+                ValorPadraoHardCode.CreateConfiguration(7)
             };
 
             _configurationRepository.InsertRange(listConfiguration);
@@ -86,6 +89,7 @@ namespace DynamicScreen.Business.HardCode
             listColumns.AddRange(EstruturaSecundariaHardCode.CreateColumns(listConfiguration.FirstOrDefault(a => a.Name.Equals("EstruturaSecundaria")).Id));
             listColumns.AddRange(ObstaculoHardCode.CreateColumns(listConfiguration.FirstOrDefault(a => a.Name.Equals("Obstaculo")).Id));
             listColumns.AddRange(TransformadorHardCode.CreateColumns(listConfiguration.FirstOrDefault(a => a.Name.Equals("Transformador")).Id));
+            listColumns.AddRange(TopologiaHardCode.CreateColumns(listConfiguration.FirstOrDefault(a => a.Name.Equals("Topologia")).Id));
             listColumns.AddRange(ValorPadraoHardCode.CreateColumns(listConfiguration.FirstOrDefault(a => a.Name.Equals("TelaGeral")).Id));
 
             _configurationColumnRepository.InsertRange(listColumns);

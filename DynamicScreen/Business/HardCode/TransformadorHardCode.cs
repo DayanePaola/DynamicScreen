@@ -107,12 +107,12 @@ namespace DynamicScreen.Business.HardCode
                 {
                     ConfigurationId = idConfiguration,
                     Name = "AtivoNoPDN",
-                    Title = "Ativo no PDN",
+                    Title = "Status: ",
                     Component = "RadioButton",
                     Index = 7,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "status",
+                    Method = "ObterRadioStatus"
                 },
                 new ConfigurationColumnModel
                 {
