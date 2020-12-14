@@ -35,7 +35,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 0,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Topologia",
                     Method = "ObterListaDeTopologias"
                 },
                 new ConfigurationColumnModel
@@ -46,7 +46,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Familia",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -57,7 +57,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 2,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Instalacao",
                     Method = null
                 },
                 new ConfigurationColumnModel

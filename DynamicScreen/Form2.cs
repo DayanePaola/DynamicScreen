@@ -56,12 +56,12 @@ namespace DynamicScreen
 
                 tabPage.SuspendLayout();
 
-                foreach (var col in columnsDto)
-                {
-                    ComboBoxFormService.GetComponent(col, tabPage);
-                    RadioButonFormService.GetComponent(col, tabPage);
-                    CheckBoxFormService.GetComponent(col, tabPage);
-                }
+                //foreach (var col in columnsDto)
+                //{
+                //    ComboBoxFormService.GetComponent(col, tabPage);
+                //    RadioButonFormService.GetComponent(col, tabPage);
+                //    CheckBoxFormService.GetComponent(col, tabPage);
+                //}
 
                 tabPage.ResumeLayout();
                 tabControl1.Controls.Add(tabPage);

@@ -82,6 +82,7 @@
     <Compile Include="Business\AutoMapper\AutoMapperProfile.cs" />
     <Compile Include="Business\Forms\ComboBoxFormService.cs" />
     <Compile Include="Business\Forms\CheckBoxFormService.cs" />
+    <Compile Include="Business\Forms\TextBoxFormService.cs" />
     <Compile Include="Business\HardCode\InitialDataBase.cs" />
     <Compile Include="Business\HardCode\ChaveHardCode.cs" />
     <Compile Include="Business\HardCode\CondutorHardCode.cs" />
@@ -151,18 +152,6 @@
     <Compile Include="Enums\ComponentAllowed.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\RadioButtonForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\RadioButtonForm.Designer.cs">
-      <DependentUpon>RadioButtonForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\CheckboxForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\CheckboxForm.Designer.cs">
-      <DependentUpon>CheckboxForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainForm1.cs">
       <SubType>Form</SubType>

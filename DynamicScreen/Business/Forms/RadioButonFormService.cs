@@ -2,6 +2,7 @@
 using DynamicScreen.Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,39 +12,42 @@ namespace DynamicScreen.Business.Forms
 {
     public static class RadioButonFormService
     {
-        public static void GetComponent(ConfigurationColumnDto column, TabPage tabPage)
+        public static int GetComponent(ConfigurationColumnDto column, Control control, int position)
         {
             if (column.Component == ComponentAllowed.RadioButton)
             {
-                var group = AddGroupBox(tabPage, column);
-                foreach (var item in column.EnableValues)
+                var group = AddGroupBox(control, column);
+                group.SuspendLayout();
+                int i = 20;
+                foreach (var item in column.EnableValues.OrderByDescending(a => a.Id))
                 {
-                    CreateComponent($"rb_{column.Name}_{item.Id}", item.Value, group);
+                    var radio = new RadioButton
+                    {
+                        Name = $"{column.Name}_{item.Id}",
+                        Text = item.Value,
+                        Dock = DockStyle.Top,
+                        Parent = group
+                    };
+                    radio.Location = new Point(i, 20);
+                    position += 40;
+                    i += radio.Width;
                 }
                 group.ResumeLayout();
             }
+
+            return position;
         }
 
-        private static void CreateComponent(string strName, string strText, Control ctrlParent)
+        private static GroupBox AddGroupBox(Control control, ConfigurationColumnDto column)
         {
-            new RadioButton
+            GroupBox grp = new GroupBox
             {
-                Name = strName,
-                Text = strText,
+                Text = column.Title,
                 Dock = DockStyle.Top,
-                Parent = ctrlParent
+                Name = $"grp_{column.Group}",
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
             };
-        }
-
-        private static GroupBox AddGroupBox(TabPage tab, ConfigurationColumnDto column)
-        {
-            GroupBox grp = new GroupBox();
-            grp.SuspendLayout();
-            grp.Text = column.Title;
-            grp.Dock = DockStyle.Top;
-            grp.Name = $"grp_{column.Group}";
-            grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            tab.Controls.Add(grp);
+            control.Controls.Add(grp);
             return grp;
         }
     }
