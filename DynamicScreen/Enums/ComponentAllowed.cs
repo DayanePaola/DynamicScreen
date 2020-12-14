@@ -8,11 +8,11 @@ namespace DynamicScreen.Enums
 {
     public enum ComponentAllowed
     {
-        Text, 
+        TextBox, 
         TextArea,
-        Check,
+        CheckBox,
         SeachModal,
-        Radio,
-        List
+        RadioButton,
+        DropDownList
     }
 }
