@@ -12,5 +12,6 @@ namespace DynamicScreen.Business.Interfaces
         ConfigurationValueDto GetValeuByColumnRow(int idColumn, int idRow);
         IEnumerable<ConfigurationValueDto> GetValuesByRow(int idRow);
         IEnumerable<ConfigurationValueDto> GetValuesByColumn(int idColumn);
+        void InsertRangeValuesDto(int idConfiguration, int idRow, IEnumerable<ConfigurationValueDto> configurationValuesDto);
     }
 }

@@ -27,7 +27,6 @@ namespace DynamicScreen
 
         void AddTab()
         {
-
             TabPage tbp = new TabPage();
             tbp.Name = "tb_cabo";
             tbp.Text = "Condutores";
@@ -37,9 +36,6 @@ namespace DynamicScreen
             cnt.Name = "Cnt" + tbp.Name;
             cnt.Width = 50;
             tbp.Controls.Add(cnt);
-
-
-            
 
             Button btn = new Button();
             btn.Name = "btn_search";
