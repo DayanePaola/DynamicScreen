@@ -63,7 +63,7 @@ namespace DynamicScreen.Business.AutoMapper
         {
             if (Enum.TryParse(component, out ComponentAllowed componentAllowed))
                 return componentAllowed;
-            return ComponentAllowed.Text;
+            return ComponentAllowed.TextBox;
         }
     }
 }

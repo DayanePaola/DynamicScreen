@@ -41,7 +41,7 @@ namespace DynamicScreen
             tab.SuspendLayout();
             var teste = new List<ComponentItemDto>(){
                 new ComponentItemDto() {
-                    Components = ComponentAllowed.Text,
+                    Components = ComponentAllowed.TextBox,
                     Group = "xablauzinho",
                     Index = 1,
                     ConfigurationColumns = new List<ConfigurationColumnDto> ()
@@ -51,7 +51,7 @@ namespace DynamicScreen
                     }
                 },
                 new ComponentItemDto() {
-                   Components = ComponentAllowed.Text,
+                   Components = ComponentAllowed.TextBox,
                    Group = "XPTO",
                    Index = 1,
                    ConfigurationColumns = new List<ConfigurationColumnDto> ()
@@ -60,7 +60,7 @@ namespace DynamicScreen
                    }
                 },
                 new ComponentItemDto() {
-                   Components = ComponentAllowed.Text,
+                   Components = ComponentAllowed.TextBox,
                    Group = "XPTO",
                    Index = 1,
                    ConfigurationColumns = new List<ConfigurationColumnDto> ()
@@ -99,7 +99,7 @@ namespace DynamicScreen
             {
                 switch (f.Components)
                 {
-                    case ComponentAllowed.Text:
+                    case ComponentAllowed.TextBox:
                         if (f.ConfigurationColumns.Count() > 1)
                         {
                             GroupBox grp = AddGroupBox(tab, f);
@@ -109,13 +109,13 @@ namespace DynamicScreen
                         }
                         AddTextBox(tab, f);
                         break;
-                    case ComponentAllowed.Radio:
+                    case ComponentAllowed.RadioButton:
                         break;
-                    case ComponentAllowed.Check:
+                    case ComponentAllowed.CheckBox:
                         break;
                     case ComponentAllowed.SeachModal:
                         break;
-                    case ComponentAllowed.List:
+                    case ComponentAllowed.DropDownList:
                         break;
                     default:
                         break;
