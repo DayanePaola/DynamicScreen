@@ -13,5 +13,23 @@ namespace DynamicScreen.Data.Respository
         public ConfigurationValueRepository(Context db) : base(db)
         {
         }
+
+        public ConfigurationValueModel GetValeuByColumnRow(int idColumn, int idRow)
+        {
+            return Db.ConfigurationValue.AsNoTracking()
+                .FirstOrDefault(a => a.ConfigurationColumnId == idColumn && a.ConfigurationRowId == idRow);
+        }
+
+        public IEnumerable<ConfigurationValueModel> GetValuesByColumn(int idColumn)
+        {
+            return Db.ConfigurationValue.AsNoTracking()
+                .Where(a => a.ConfigurationColumnId == idColumn);
+        }
+
+        public IEnumerable<ConfigurationValueModel> GetValuesByRow(int idRow)
+        {
+            return Db.ConfigurationValue.AsNoTracking()
+                .Where(a => a.ConfigurationRowId == idRow);
+        }
     }
 }

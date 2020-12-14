@@ -5,15 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DynamicScreen.Business.Util;
+using DynamicScreen.Dto;
 
 namespace DynamicScreen.Business.HardCode.Methods
 {
     public class ColumnMethodHardCode : IColumnMethod
     {
-        public IEnumerable<Topologia> ObterListaDeTopologias()
+        public IEnumerable<ValueDto> ObterListaDeTopologias()
         {
-            var lista = new Topologias().ListaCondutores;
-            return lista;
+            var topologia = new Topologias().ListaCondutores;
+            return MapTopologiaToValueDto(topologia);
+        }
+
+        private IEnumerable<ValueDto> MapTopologiaToValueDto(IEnumerable<Topologia> topologias)
+        {
+            foreach (var item in topologias)
+            {
+                var valueDto = new ValueDto
+                {
+                    Id = item.Codigo,
+                    Value = item.Descricao
+                };
+                yield return valueDto;
+            }
         }
     }
 

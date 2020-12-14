@@ -20,5 +20,11 @@ namespace DynamicScreen.Data.Respository
                 .Include("ConfigurationValue")
                 .FirstOrDefault(a => a.Id == id);
         }
+
+        public IEnumerable<ConfigurationRowModel> GetRowsByConfiguration(int idConfiguration)
+        {
+            return Db.ConfigurationRow.AsNoTracking()
+                .Where(a => a.ConfigurationId == idConfiguration);
+        }
     }
 }

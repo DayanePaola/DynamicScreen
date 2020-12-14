@@ -9,7 +9,7 @@ namespace DynamicScreen.Data.Models
         public bool Enable { get; set; }
         public int Index { get; set; }
 
-        public virtual ICollection<ConfigurationColumnModel> ConfigurationColumn { get; set; }
-        public virtual ICollection<ConfigurationRowModel> ConfigurationRow { get; set; }
+        public ICollection<ConfigurationColumnModel> ConfigurationColumn { get; set; }
+        public ICollection<ConfigurationRowModel> ConfigurationRow { get; set; }
     }
 }

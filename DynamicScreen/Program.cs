@@ -1,4 +1,6 @@
-﻿using DynamicScreen.Data;
+﻿using DynamicScreen.Business.AutoMapper;
+using DynamicScreen.Business.HardCode;
+using DynamicScreen.Data;
 using System;
 using System.Windows.Forms;
 
@@ -14,6 +16,8 @@ namespace DynamicScreen
         public static void Main()
         {
             _context = new Context();
+            
+            new InitialDataBase(_context);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm(_context));

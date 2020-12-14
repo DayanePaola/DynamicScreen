@@ -9,6 +9,8 @@ namespace DynamicScreen.Business.Interfaces
 {
     public interface IConfigurationValueRepository : IRepository<ConfigurationValueModel>
     {
-        
+        ConfigurationValueModel GetValeuByColumnRow(int idColumn, int idRow);
+        IEnumerable<ConfigurationValueModel> GetValuesByRow(int idRow);
+        IEnumerable<ConfigurationValueModel> GetValuesByColumn(int idColumn);
     }
 }
