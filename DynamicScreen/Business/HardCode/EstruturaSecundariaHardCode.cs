@@ -34,7 +34,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 0,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "QuantidadeDeRedesDeBT",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -45,7 +45,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "DeflexaoMaxima",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -67,7 +67,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 3,
                     ReadOnly = false,
-                    Group = null,
+                    Group =  "FimDeRedeDeBT",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -78,7 +78,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 4,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Estrutura",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -89,7 +89,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 5,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "NTC",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -100,7 +100,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 6,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "TipoDeEstrutura",
                     Method = null
                 }
             };

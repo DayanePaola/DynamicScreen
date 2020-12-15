@@ -31,7 +31,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 0,
                     ReadOnly = false,
                     Group = "Material A",
@@ -42,7 +42,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Condutor",
                     Title = "Condutor",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 1,
                     ReadOnly = false,
                     Group = "Material A",
@@ -53,7 +53,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 2,
                     ReadOnly = false,
                     Group = "Material B",
@@ -64,7 +64,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Condutor",
                     Title = "Condutor",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 3,
                     ReadOnly = false,
                     Group = "Material B",
@@ -75,7 +75,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 4,
                     ReadOnly = false,
                     Group = "Material C",
@@ -86,7 +86,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Condutor",
                     Title = "Condutor",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 5,
                     ReadOnly = false,
                     Group = "Material C",
@@ -97,7 +97,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 6,
                     ReadOnly = false,
                     Group = "Material Neutro",
@@ -108,7 +108,7 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Condutor",
                     Title = "Condutor",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 7,
                     ReadOnly = false,
                     Group = "Material Neutro",
@@ -122,7 +122,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 8,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Limite do Vão",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -133,7 +133,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 9,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Limite do Tramo",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -144,7 +144,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 10,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Tipo da Fase",
                     Method = null
                 }
             };
@@ -152,42 +152,21 @@ namespace DynamicScreen.Business.HardCode
             return listColumns;
         }
 
-        public IEnumerable<ConfigurationRowModel> CreateRows(int idConfiguration, int countRows)
-        {
-            var listRows = new List<ConfigurationRowModel>();
-
-            for (int i = 0; i < countRows; i++)
-            {
-                var novaLinha = new ConfigurationRowModel
-                {
-                    ConfigurationId = idConfiguration,
-                    Index = i
-                };
-
-                listRows.Add(novaLinha);
-            }
-
-            return listRows;
-        }
-
         public IEnumerable<ConfigurationColumnFillModel> CreateFill(List<ConfigurationColumnModel> columns)
         {
             var listFill = new List<ConfigurationColumnFillModel>();
-
-            columns = columns.Where(a => a.Group != null).ToList();
-
-            for (int i = 0; i < columns.Count; i++)
+            
+            var col = columns.GroupBy(g => g.Group)
+                .Select(s => new { Group = s.Key, Columns = s.ToList() })
+                .ToList();
+            foreach (var item in col)
             {
-                if (i % 2 == 0)
+                listFill.Add(new ConfigurationColumnFillModel
                 {
-                    listFill.Add(new ConfigurationColumnFillModel
-                    {
-                        ConfigurationColumnSourceId = columns[i].Id,
-                        ConfigurationColumnDestinationId = columns[i + 1].Id
-                    });
-                }
+                    ConfigurationColumnSourceId = item.Columns.FirstOrDefault().Id,
+                    ConfigurationColumnDestinationId = item.Columns.LastOrDefault().Id
+                });
             }
-
             return listFill;
         }
     }

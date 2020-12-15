@@ -96,10 +96,10 @@ namespace DynamicScreen.Business.HardCode
         private IEnumerable<ConfigurationColumnFillModel> CreateConfigurationColumnFill()
         {
             var listConfiguration = _configurationRepository.GetAll();
-            var configuration = _configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Condutor")).Id);
-
             var listFill = new List<ConfigurationColumnFillModel>();
-            listFill.AddRange(CondutorHardCode.CreateFill(configuration.ConfigurationColumn.ToList()));
+            listFill.AddRange(CondutorHardCode.CreateFill(_configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Condutor")).Id).ConfigurationColumn.ToList()));
+            listFill.AddRange(TransformadorHardCode.CreateFill(_configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Transformador")).Id).ConfigurationColumn.ToList()));
+            listFill.AddRange(ChaveHardCode.CreateFill(_configurationRepository.GetConfigurationColumnRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Chave")).Id).ConfigurationColumn.ToList()));
 
             _configurationColumnFillRepository.InsertRange(listFill);
 
@@ -110,7 +110,7 @@ namespace DynamicScreen.Business.HardCode
         {
             var listConfiguration = _configurationRepository.GetAll();
             var listRows = new List<ConfigurationRowModel>();
-            listRows.AddRange(CondutorHardCode.CreateRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("Condutor")).Id, 2));
+            
             listRows.AddRange(ValorPadraoHardCode.CreateRows(listConfiguration.FirstOrDefault(a => a.Name.Equals("TelaGeral")).Id, 1));
 
             _configurationRowRepository.InsertRange(listRows);

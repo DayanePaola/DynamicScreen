@@ -128,6 +128,7 @@
     <Compile Include="Data\Respository\Repository.cs" />
     <Compile Include="Dto\ComponentItemDto.cs" />
     <Compile Include="Dto\ConfigurationColumnDto.cs" />
+    <Compile Include="Dto\ConfigurationColumnFillDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />
     <Compile Include="Dto\ConfigurationRowDto.cs" />
     <Compile Include="Dto\ConfigurationTabDto.cs" />

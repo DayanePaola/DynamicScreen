@@ -29,56 +29,56 @@ namespace DynamicScreen.Business.HardCode
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Name = "IdDoObjeto",
-                    Title = "Id do Objeto",
+                    Name = "ObstaculoCodigo",
+                    Title = "Código",
                     Component = "TextBox",
                     Index = 0,
                     ReadOnly = false,
-                    Group = null,
+                    Group ="Obstaculo",
                     Method = null
                 },
-                new ConfigurationColumnModel
+                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
-                    Name = "ObstaculoCodigo",
-                    Title = "Obstáculo Código",
+                    Name = "ObstaculoDescricao",
+                    Title = "Descrição",
                     Component = "TextBox",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group ="Obstaculo",
                     Method = null
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "ObstaculPosicao",
-                    Title = "Obstáculo Posição",
+                    Title = "Posição",
                     Component = "TextBox",
                     Index = 2,
                     ReadOnly = false,
-                    Group = null,
+                    Group ="ObstaculPosicao",
                     Method = null
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "ObstaculoDistanciaParaInstalarPoste",
-                    Title = "Obstáculo Distância para Instalar Poste",
+                    Title = "Distância para Instalar Poste",
                     Component = "TextBox",
                     Index = 3,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "ObstaculoDistanciaParaInstalarPoste",
                     Method = null
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "ObstaculoObservacao",
-                    Title = "Obstáculo Observação",
+                    Title = "Observação",
                     Component = "TextArea",
                     Index = 4,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "ObstaculoObservacao",
                     Method = null
                 }
             };

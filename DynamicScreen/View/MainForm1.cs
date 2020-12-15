@@ -93,7 +93,7 @@ namespace DynamicScreen
                   {
                       Group = s.Key,
                       ConfigurationColumns = s.ToList(),
-                      SearchModal = s.Any(a => a.Component == ComponentAllowed.SeachModal)
+                      SearchModal = s.All(a => a.Component == ComponentAllowed.SeachModal)
                   })
                   .ToList()
                   .ForEach(f =>
