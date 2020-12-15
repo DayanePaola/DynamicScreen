@@ -42,21 +42,21 @@ namespace DynamicScreen
                 var tab = AddTab(item);
                 tab.SuspendLayout();
                 AddButtonSave(item, tab);
-                AddGrid(item, tab);
+                //AddGrid(item, tab);
                 AddButtonSave(item, AddPanel(tab,item.Index,1));
                 SetComponents(item, tab);
                 tab.ResumeLayout();
             }
         }
 
-        private void AddGrid(ConfigurationTabDto item, TabPage tab)
-        {
-            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
-            DataGridView dgv = new DataGridView()
-            {
+        //private void AddGrid(ConfigurationTabDto item, TabPage tab)
+        //{
+        //    var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
+        //    DataGridView dgv = new DataGridView()
+        //    {
 
-            };
-        }
+        //    };
+        //}
 
         private void AddButtonSave(ConfigurationTabDto item, Control tab)
         {
