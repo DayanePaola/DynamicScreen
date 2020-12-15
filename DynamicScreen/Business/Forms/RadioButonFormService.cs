@@ -23,7 +23,7 @@ namespace DynamicScreen.Business.Forms
                 {
                     var radio = new RadioButton
                     {
-                        Name = $"{column.Name}_{item.Id}",
+                        Name = $"{column.Name}_{column.Id}_{item.Id}",
                         Text = item.Value,
                         Parent = group,
                         AutoSize = true

@@ -17,23 +17,41 @@ namespace DynamicScreen.Business.Forms
     {
         public static void GetComponent(List<ConfigurationColumnDto> columns, List<ConfigurationRowDto> rows, Control control)
         {
+            //var panel = new Panel();
+            //panel.SuspendLayout();
+            //panel.Name = $"pnl_mygrid";
+            //panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            //panel.Dock = DockStyle.Top;
+            //panel.Parent = control;
+
             var myNewGrid = new DataGridView();
             ((ISupportInitialize)(myNewGrid)).BeginInit();
             control.SuspendLayout();
             myNewGrid.Parent = control;
             myNewGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            myNewGrid.Location = new Point(10, 300);
+            myNewGrid.Location = new Point(20, 350);
             myNewGrid.Name = "myNewGrid";
-            myNewGrid.Size = new Size(750, 500);
+            myNewGrid.Size = new Size(750, 100);
+            //myNewGrid.AutoSize = true;
             myNewGrid.TabIndex = 0;
+            myNewGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             myNewGrid.ColumnHeadersVisible = true;
             myNewGrid.RowHeadersVisible = true;
             myNewGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             myNewGrid.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             ((ISupportInitialize)(myNewGrid)).EndInit();
 
-            if(rows.Count > 0)
+            if (rows.Count > 0)
+            {
                 myNewGrid.DataSource = JsonConvert.DeserializeObject<DataTable>(RetornoJson(columns, rows));
+            }
+            else
+            {
+                foreach (var item in columns)
+                {
+                    myNewGrid.Columns.Add(item.Name, item.Title);
+                }
+            }
 
             control.ResumeLayout(false);
             myNewGrid.Visible = true;
