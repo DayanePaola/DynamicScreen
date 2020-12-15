@@ -10,5 +10,7 @@ namespace DynamicScreen.Business.Interfaces
     public interface IConfigurationColumnService
     {
         IEnumerable<ConfigurationColumnDto> GetColumnsByConfigurationDto(int idConfiguration);
+
+        ConfigurationColumnDto GetColumnDtoById(int idColumn);
     }
 }

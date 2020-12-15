@@ -80,12 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\AutoMapper\AutoMapperProfile.cs" />
+    <Compile Include="Business\Forms\ComboBoxFormService.cs" />
+    <Compile Include="Business\Forms\CheckBoxFormService.cs" />
+    <Compile Include="Business\Forms\TextBoxFormService.cs" />
     <Compile Include="Business\HardCode\InitialDataBase.cs" />
     <Compile Include="Business\HardCode\ChaveHardCode.cs" />
     <Compile Include="Business\HardCode\CondutorHardCode.cs" />
     <Compile Include="Business\HardCode\EstruturaSecundariaHardCode.cs" />
     <Compile Include="Business\HardCode\Methods\ColumnMethodHardCode.cs" />
     <Compile Include="Business\HardCode\ObstaculoHardCode.cs" />
+    <Compile Include="Business\HardCode\TopologiaHardCode.cs" />
     <Compile Include="Business\HardCode\ValorPadraoHardCode.cs" />
     <Compile Include="Business\HardCode\TransformadorHardCode.cs" />
     <Compile Include="Business\HardCode\ParaRaiosHardCode.cs" />
@@ -102,6 +106,7 @@
     <Compile Include="Business\Interfaces\IConfigurationValueRepository.cs" />
     <Compile Include="Business\Interfaces\IMethodColumnService.cs" />
     <Compile Include="Business\Interfaces\IRepository.cs" />
+    <Compile Include="Business\Forms\RadioButonFormService.cs" />
     <Compile Include="Business\Services\ConfigurationColumnService.cs" />
     <Compile Include="Business\Services\ConfigurationValueService.cs" />
     <Compile Include="Business\Services\ConfigurationRowService.cs" />
@@ -197,6 +202,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Migrations\202012092304409_RemoveMethodFill.resx">
       <DependentUpon>202012092304409_RemoveMethodFill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

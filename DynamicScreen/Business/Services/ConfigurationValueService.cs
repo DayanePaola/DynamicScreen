@@ -21,8 +21,8 @@ namespace DynamicScreen.Business.Services
         public ConfigurationValueService(Context context)
         {
             _configurationValueRepository = new ConfigurationValueRepository(context);
-            _mapper = new Mapper(ConfigurationMapper.MapperConfiguration());
             _configurationRowRepository = new ConfigurationRowRepository(context);
+            _mapper = new Mapper(ConfigurationMapper.MapperConfiguration());
         }
 
         public ConfigurationValueDto GetValeuByColumnRow(int idColumn, int idRow)
@@ -43,6 +43,7 @@ namespace DynamicScreen.Business.Services
         public void InsertRangeValuesDto(int idConfiguration, int idRow, IEnumerable<ConfigurationValueDto> configurationValuesDto)
         {
             var configurationValuesModel = _mapper.Map<IEnumerable<ConfigurationValueModel>>(configurationValuesDto);
+
             var configurationRowModel = _configurationRowRepository.GetById(idRow);
 
             if (configurationRowModel == null)
@@ -58,6 +59,7 @@ namespace DynamicScreen.Business.Services
             }
 
             configurationValuesModel.ToList().ForEach(a => a.ConfigurationRowId = configurationRowModel.Id);
+
             _configurationValueRepository.InsertRange(configurationValuesModel);
         }
     }

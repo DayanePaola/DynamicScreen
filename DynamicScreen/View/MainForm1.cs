@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DynamicScreen.Business.AutoMapper;
+using DynamicScreen.Business.Forms;
 using DynamicScreen.Business.Interfaces;
 using DynamicScreen.Business.Services;
 using DynamicScreen.Data;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace DynamicScreen
@@ -98,28 +100,32 @@ namespace DynamicScreen
                   .ToList()
                   .ForEach(f =>
                   {
-
-
-                      f.ConfigurationColumns.ForEach(fo =>
+                      var control = AddControl(tab, f);
+                      var position = 20;
+                      f.ConfigurationColumns.ToList().ForEach(fo =>
                       {
                           switch (fo.Component)
                           {
                               case ComponentAllowed.TextBox:
-                                  AddTextBox(tab, f);
+                                  position = AddTextBox(control, fo, position);
                                   break;
                               case ComponentAllowed.RadioButton:
+                                  position = RadioButonFormService.GetComponent(fo, control, position);
                                   break;
                               case ComponentAllowed.CheckBox:
+                                  position = CheckBoxFormService.GetComponent(fo, control, position);
                                   break;
                               case ComponentAllowed.SeachModal:
                                   break;
                               case ComponentAllowed.DropDownList:
+                                  position = AddComboBox(control, fo, position);
                                   break;
                               default:
                                   break;
                           }
                       });
 
+                      control.ResumeLayout(false);
                   });
         }
 
@@ -139,6 +145,7 @@ namespace DynamicScreen
                 grp.Dock = DockStyle.Top;
                 grp.Name = $"grp_{f.Group}";
                 grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                grp.Height = 50 * (f.ConfigurationColumns.Count);
                 tab.Controls.Add(grp);
                 return grp;
             }
@@ -148,35 +155,56 @@ namespace DynamicScreen
             panel.Name = $"pnl_{f.Index}";
             panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel.Dock = DockStyle.Top;
+            panel.Height = 50 * (f.ConfigurationColumns.Count);
             tab.Controls.Add(panel);
             return panel;
         }
 
-        private static void AddTextBox(TabPage tab, ComponentItemDto f)
+        private static int AddTextBox(Control control, ConfigurationColumnDto fo, int position)
         {
-            var control = AddControl(tab, f);
-            var position = 20;
-            f.ConfigurationColumns.OrderByDescending(o => o.Index).ToList().ForEach(fo =>
+            Label lbl = new Label();
+            lbl.Text = fo.Title;
+            lbl.AutoSize = true;
+            lbl.Name = $"lbl_{fo.Name}_{fo.Id}";
+            lbl.Parent = control;
+
+            TextBox txt = new TextBox();
+            txt.Name = $"{fo.Name}_{fo.Id}";
+            txt.TabIndex = fo.Index;
+            txt.AutoSize = true;
+            txt.Parent = control;
+
+            lbl.Location = new System.Drawing.Point(20, position);
+            txt.Location = new System.Drawing.Point(lbl.Width + 20, position);
+            position += 40;
+            return position;
+        }
+
+        private static int AddComboBox(Control control, ConfigurationColumnDto fo, int position)
+        {
+            var lbl = new Label
             {
-                Label lbl = new Label();
-                lbl.Text = fo.Title;
-                lbl.AutoSize = true;
-                lbl.Name = $"lbl_{fo.Name}_{fo.Id}";
-                lbl.Parent = control;
+                Text = fo.Title,
+                AutoSize = true,
+                Name = $"lbl_{fo.Name}_{fo.Id}",
+                Parent = control
+            };
 
-                TextBox txt = new TextBox();
-                txt.Name = $"{fo.Name}_{fo.Id}";
-                txt.TabIndex = fo.Index;
-                txt.AutoSize = true;
-                txt.Parent = control;
+            var cbx = new ComboBox
+            {
+                Name = $"{fo.Name}_{fo.Id}",
+                TabIndex = fo.Index,
+                AutoSize = true,
+                Parent = control,
+                DataSource = fo.EnableValues,
+                ValueMember = "Id",
+                DisplayMember = "Value"
+            };
 
-                lbl.Location = new System.Drawing.Point(20, position);
-                txt.Location = new System.Drawing.Point(lbl.Width + 20, position);
-                position += 40;
-                control.Controls.Add(lbl);
-                control.Controls.Add(txt);
-            });
-            control.ResumeLayout(false);
+            lbl.Location = new System.Drawing.Point(20, position);
+            cbx.Location = new System.Drawing.Point(lbl.Width + 20, position);
+            position += 40;
+            return position;
         }
     }
 }
