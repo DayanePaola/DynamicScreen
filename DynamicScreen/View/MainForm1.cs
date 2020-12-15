@@ -41,20 +41,10 @@ namespace DynamicScreen
             {
                 var tab = AddTab(item);
                 tab.SuspendLayout();
-                AddGrid(item, tab);
                 AddButtonSave(item, tab);
                 SetComponents(item, tab);
                 tab.ResumeLayout();
             }
-        }
-
-        private void AddGrid(ConfigurationTabDto item, TabPage tab)
-        {
-            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
-            DataGridView dgv = new DataGridView()
-            {
-                
-            };
         }
 
         private void AddButtonSave(ConfigurationTabDto item, TabPage tab)
@@ -157,6 +147,16 @@ namespace DynamicScreen
 
                       control.ResumeLayout(false);
                   });
+
+            foreach (var item in config.ConfigurationRow)
+            {
+                if (item.ConfigurationValue == null)
+                    item.ConfigurationValue = new List<ConfigurationValueDto>();
+
+                item.ConfigurationValue.AddRange(_configurationValueService.GetValuesByRow(item.Id));
+            }
+
+            DataGridViewFormService.GetComponent(config.ConfigurationColumn.ToList(), config.ConfigurationRow.ToList(), tab);
         }
 
         private void AddButtonSearch(Control control, ComponentItemDto componentDto, ConfigurationColumnFillDto config_fill ,ref int position_y, ref int position_x)
