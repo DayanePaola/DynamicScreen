@@ -25,8 +25,8 @@ namespace DynamicScreen.Business.Forms
                     {
                         Name = $"{column.Name}_{item.Id}",
                         Text = item.Value,
-                        Dock = DockStyle.Top,
-                        Parent = group
+                        Parent = group,
+                        AutoSize = true
                     };
                     radio.Location = new Point(i, 20);
                     position += 40;

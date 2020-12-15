@@ -15,11 +15,14 @@ namespace DynamicScreen.View
     {
         public List<ValueDto> BaseListSearch { get; set; }
         public SearchDto SearchDtoBase { get; set; }
-        public GenericSearch(SearchDto searchDto)
+        private MainForm1 Called { get; set; }
+        public GenericSearch(SearchDto searchDto, MainForm1 called)
         {
             InitializeComponent();
+            Called = called;         
             BaseListSearch = searchDto.SearchItems;
             SearchDtoBase = searchDto;
+            SearchDtoBase.SelectItem = new ValueDto();
             SetLabelsName(searchDto);
             BindingGrid(searchDto);
         }
@@ -57,14 +60,25 @@ namespace DynamicScreen.View
         private void btn_Cancelar_Click(object sender, EventArgs e)
         {
             SearchDtoBase = null;
-            this.Close();
+            this.Hide();
+            Called.Show();
         }
         private void btn_Selecionar_Click(object sender, EventArgs e)
         {
-            var teste = dgv_search.SelectedRows;
-            var teste1 = teste[1].DataBoundItem.ToString();
-            //SearchDtoBase.SelectItem = 
-            this.Close();
+            this.Hide();
+            Called.Show();
+            Called.BringToFront();
+            Called.SetFieldValue(SearchDtoBase);
+        }
+
+        private void dgv_search_SelectionChanged(object sender, EventArgs e)
+        {
+            if (((DataGridView)sender).SelectedRows.Count > 0)
+            {
+                var val = ((DataGridView)sender).SelectedRows[0];
+                SearchDtoBase.SelectItem.Id = val.Cells[0].Value.ToString();
+                SearchDtoBase.SelectItem.Value = val.Cells[1].Value.ToString();
+            }
         }
     }
 }

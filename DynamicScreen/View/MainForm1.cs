@@ -42,25 +42,36 @@ namespace DynamicScreen
                 var tab = AddTab(item);
                 tab.SuspendLayout();
                 AddButtonSave(item, tab);
+                AddGrid(item, tab);
+                AddButtonSave(item, AddPanel(tab,item.Index,1));
                 SetComponents(item, tab);
                 tab.ResumeLayout();
             }
         }
 
-        private void AddButtonSave(ConfigurationTabDto item, TabPage tab)
+        private void AddGrid(ConfigurationTabDto item, TabPage tab)
+        {
+            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
+            DataGridView dgv = new DataGridView()
+            {
+
+            };
+        }
+
+        private void AddButtonSave(ConfigurationTabDto item, Control tab)
         {
             Button btn = new Button();
             btn.Parent = tab;
             btn.Name = $"btn_salvar_{item.Id}";
             btn.Text = "Salvar";
-            btn.Dock = DockStyle.Top;
+            btn.Dock = DockStyle.Right;
             btn.Click += (object sender, EventArgs e) =>
             {
                 Salvar(item, tab);
             };
         }
 
-        private void Salvar(ConfigurationTabDto item, TabPage tab)
+        private void Salvar(ConfigurationTabDto item, Control tab)
         {
             var configValues = new List<ConfigurationValueDto>();
             var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
@@ -83,7 +94,16 @@ namespace DynamicScreen
             var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
             AddComponents(configurationDto, tab);
         }
+        public void SetFieldValue(SearchDto item)
+        {
+            var source = this.Controls.Find(item.ColumnSourceName, true).FirstOrDefault();
+            source.Text = item.SelectItem.Id;
 
+            var destination = this.Controls.Find(item.ColumnDestinationName, true).FirstOrDefault();
+            destination.Text = item.SelectItem.Value;
+
+            source.Focus();
+        }
         private TabPage AddTab(ConfigurationTabDto item)
         {
             TabPage tbp = new TabPage();
@@ -112,13 +132,13 @@ namespace DynamicScreen
                       var position = 20;
                       if (f.SearchModal)
                       {
-                          var source = f.ConfigurationColumns.OrderBy(o=>o.Index).FirstOrDefault(fi => !fi.ReadOnly);
+                          var source = f.ConfigurationColumns.OrderBy(o => o.Index).FirstOrDefault(fi => !fi.ReadOnly);
                           var config_fill = _configurationColumnFillService.GetColumnsFillByColumnSource(source.Id).FirstOrDefault();
                           AddTextBox(control, f.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill?.ConfigurationColumnSourceId), ref position, ref pos_x);
                           position -= 40;
                           AddTextBox(control, f.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill.ConfigurationColumnDestinationId), ref position, ref pos_x);
                           position -= 40;
-                          AddButtonSearch(control, f,config_fill ,ref position, ref pos_x);
+                          AddButtonSearch(control, f, config_fill, ref position, ref pos_x);
                       }
                       else
                       {
@@ -159,7 +179,7 @@ namespace DynamicScreen
             DataGridViewFormService.GetComponent(config.ConfigurationColumn.ToList(), config.ConfigurationRow.ToList(), tab);
         }
 
-        private void AddButtonSearch(Control control, ComponentItemDto componentDto, ConfigurationColumnFillDto config_fill ,ref int position_y, ref int position_x)
+        private void AddButtonSearch(Control control, ComponentItemDto componentDto, ConfigurationColumnFillDto config_fill, ref int position_y, ref int position_x)
         {
             Button btn = new Button();
             btn.Parent = control;
@@ -180,7 +200,7 @@ namespace DynamicScreen
 
             btn.Click += (object sender, EventArgs e) =>
             {
-                var form = new GenericSearch(search);
+                var form = new GenericSearch(search, this);
                 form.Show();
             };
             position_y += 40;
@@ -203,17 +223,22 @@ namespace DynamicScreen
                 grp.Dock = DockStyle.Top;
                 grp.Name = $"grp_{f.Group}";
                 grp.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                grp.Height = 50 * (f.ConfigurationColumns.Count);
+                grp.Height = 50 * (f.SearchModal? 1 : f.ConfigurationColumns.Count);
                 tab.Controls.Add(grp);
                 return grp;
             }
 
+            return AddPanel(tab, f.Index, f.ConfigurationColumns.Count);
+        }
+
+        private static Control AddPanel(TabPage tab, int index, int count)
+        {
             var panel = new Panel();
             panel.SuspendLayout();
-            panel.Name = $"pnl_{f.Index}";
+            panel.Name = $"pnl_{index}_{tab.Name}";
             panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel.Dock = DockStyle.Top;
-            panel.Height = 50 * (f.ConfigurationColumns.Count);
+            panel.Height = 45 * count;
             tab.Controls.Add(panel);
             return panel;
         }

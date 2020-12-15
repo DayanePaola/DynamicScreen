@@ -66,8 +66,8 @@ namespace DynamicScreen
         private void ReturnClickMethod(object sender, EventArgs e)
         {
             SearchDto searchDto = (SearchDto)sender;
-            var form = new GenericSearch(searchDto);
-            form.Show();
+            //var form = new GenericSearch(searchDto, this);
+            //form.Show();
         }
     }
 }

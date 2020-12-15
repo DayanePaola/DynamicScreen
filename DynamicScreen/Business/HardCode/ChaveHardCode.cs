@@ -46,7 +46,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 2,
                     ReadOnly = false,
                     Group = "Fase",
-                    Method = null
+                    Method = "ObterFase"
                 },
                 new ConfigurationColumnModel
                 {
@@ -68,7 +68,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 3,
                     ReadOnly = false,
                     Group = "Status",
-                    Method = null
+                    Method = "ObterRadioStatus"
                 },
                 new ConfigurationColumnModel
                 {
@@ -79,7 +79,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 4,
                     ReadOnly = false,
                     Group = "Tensão",
-                    Method = null
+                    Method = "ObterTensao"
                 },
                 new ConfigurationColumnModel
                 {
@@ -89,7 +89,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 5,
                     ReadOnly = false,
-                    Group = "Tensão",
+                    Group = "Quantidade",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -101,7 +101,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 6,
                     ReadOnly = false,
                     Group = "Subestação",
-                    Method = null
+                    Method = "ObterRadioSimNão"
                 }
             };
 
