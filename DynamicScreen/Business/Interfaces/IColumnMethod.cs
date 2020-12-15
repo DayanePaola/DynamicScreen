@@ -12,5 +12,7 @@ namespace DynamicScreen.Business.Interfaces
     {
         IEnumerable<ValueDto> ObterListaDeTopologias();
         IEnumerable<ValueDto> ObterListaDeChaves();
+        IEnumerable<ValueDto> ObterListaDeTransformadores();
+        IEnumerable<ValueDto> ObterListaDeCondutores();
     }
 }

@@ -108,9 +108,11 @@
     <Compile Include="Business\Interfaces\IRepository.cs" />
     <Compile Include="Business\Forms\RadioButonFormService.cs" />
     <Compile Include="Business\Services\ConfigurationColumnService.cs" />
+    <Compile Include="Business\Services\ConfigurationColumnFillService.cs" />
     <Compile Include="Business\Services\ConfigurationValueService.cs" />
     <Compile Include="Business\Services\ConfigurationRowService.cs" />
     <Compile Include="Business\Services\ConfigurationService.cs" />
+    <Compile Include="Business\Services\IConfigurationColumnFillService.cs" />
     <Compile Include="Business\Services\MethodColumnService.cs" />
     <Compile Include="Business\Util\ObjectExtensions.cs" />
     <Compile Include="Data\Context.cs" />
@@ -148,7 +150,6 @@
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dto\BaseSearchDto.cs" />
     <Compile Include="Dto\SearchDto.cs" />
     <Compile Include="Enums\ComponentAllowed.cs" />
     <Compile Include="MainForm.Designer.cs">

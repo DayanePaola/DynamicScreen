@@ -8,6 +8,7 @@ using DynamicScreen.Data.Models;
 using DynamicScreen.Data.Respository;
 using DynamicScreen.Dto;
 using DynamicScreen.Enums;
+using DynamicScreen.View;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,6 +24,7 @@ namespace DynamicScreen
         private readonly IConfigurationColumnService _configurationColumnService;
         private readonly IConfigurationRowService _configurationRowService;
         private readonly IConfigurationValueService _configurationValueService;
+        private readonly IConfigurationColumnFillService _configurationColumnFillService;
 
         public MainForm1(Context db)
         {
@@ -32,23 +34,40 @@ namespace DynamicScreen
             _configurationColumnService = new ConfigurationColumnService(db);
             _configurationRowService = new ConfigurationRowService(db);
             _configurationValueService = new ConfigurationValueService(db);
+            _configurationColumnFillService = new ConfigurationColumnFillService(db);
 
             var configurationsDto = _configurationService.GetAllConfigurationsDto();
             foreach (var item in configurationsDto)
             {
                 var tab = AddTab(item);
-                Button btn = new Button();
-                btn.Parent = tab;
-                btn.Name = $"btn_salvar_{item.Id}";
-                btn.Text = "Salvar";
-                btn.Dock = DockStyle.Top;
-                btn.Click += (object sender, EventArgs e) =>
-                {
-                    Salvar(item, tab);
-                };
-
+                tab.SuspendLayout();
+                AddGrid(item, tab);
+                AddButtonSave(item, tab);
                 SetComponents(item, tab);
+                tab.ResumeLayout();
             }
+        }
+
+        private void AddGrid(ConfigurationTabDto item, TabPage tab)
+        {
+            var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
+            DataGridView dgv = new DataGridView()
+            {
+                
+            };
+        }
+
+        private void AddButtonSave(ConfigurationTabDto item, TabPage tab)
+        {
+            Button btn = new Button();
+            btn.Parent = tab;
+            btn.Name = $"btn_salvar_{item.Id}";
+            btn.Text = "Salvar";
+            btn.Dock = DockStyle.Top;
+            btn.Click += (object sender, EventArgs e) =>
+            {
+                Salvar(item, tab);
+            };
         }
 
         private void Salvar(ConfigurationTabDto item, TabPage tab)
@@ -71,10 +90,8 @@ namespace DynamicScreen
 
         private void SetComponents(ConfigurationTabDto item, TabPage tab)
         {
-            tab.SuspendLayout();
             var configurationDto = _configurationService.GetConfigurationByIdDto(item.Id);
             AddComponents(configurationDto, tab);
-            tab.ResumeLayout();
         }
 
         private TabPage AddTab(ConfigurationTabDto item)
@@ -95,38 +112,79 @@ namespace DynamicScreen
                   {
                       Group = s.Key,
                       ConfigurationColumns = s.ToList(),
-                      SearchModal = s.All(a => a.Component == ComponentAllowed.SeachModal)
+                      SearchModal = s.All(a => a.Component == ComponentAllowed.SearchModal)
                   })
                   .ToList()
                   .ForEach(f =>
                   {
                       var control = AddControl(tab, f);
+                      var pos_x = 20;
                       var position = 20;
-                      f.ConfigurationColumns.ToList().ForEach(fo =>
+                      if (f.SearchModal)
                       {
-                          switch (fo.Component)
+                          var source = f.ConfigurationColumns.OrderBy(o=>o.Index).FirstOrDefault(fi => !fi.ReadOnly);
+                          var config_fill = _configurationColumnFillService.GetColumnsFillByColumnSource(source.Id).FirstOrDefault();
+                          AddTextBox(control, f.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill?.ConfigurationColumnSourceId), ref position, ref pos_x);
+                          position -= 40;
+                          AddTextBox(control, f.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill.ConfigurationColumnDestinationId), ref position, ref pos_x);
+                          position -= 40;
+                          AddButtonSearch(control, f,config_fill ,ref position, ref pos_x);
+                      }
+                      else
+                      {
+                          f.ConfigurationColumns.ToList().ForEach(fo =>
                           {
-                              case ComponentAllowed.TextBox:
-                                  position = AddTextBox(control, fo, position);
-                                  break;
-                              case ComponentAllowed.RadioButton:
-                                  position = RadioButonFormService.GetComponent(fo, control, position);
-                                  break;
-                              case ComponentAllowed.CheckBox:
-                                  position = CheckBoxFormService.GetComponent(fo, control, position);
-                                  break;
-                              case ComponentAllowed.SeachModal:
-                                  break;
-                              case ComponentAllowed.DropDownList:
-                                  position = AddComboBox(control, fo, position);
-                                  break;
-                              default:
-                                  break;
-                          }
-                      });
+                              switch (fo.Component)
+                              {
+                                  case ComponentAllowed.TextBox:
+                                      AddTextBox(control, fo, ref position, ref pos_x);
+                                      pos_x = 20;
+                                      break;
+                                  case ComponentAllowed.RadioButton:
+                                      position = RadioButonFormService.GetComponent(fo, control, position);
+                                      break;
+                                  case ComponentAllowed.CheckBox:
+                                      position = CheckBoxFormService.GetComponent(fo, control, position);
+                                      break;
+                                  case ComponentAllowed.DropDownList:
+                                      position = AddComboBox(control, fo, position);
+                                      break;
+                                  default:
+                                      break;
+                              }
+                          });
+                      }
 
                       control.ResumeLayout(false);
                   });
+        }
+
+        private void AddButtonSearch(Control control, ComponentItemDto componentDto, ConfigurationColumnFillDto config_fill ,ref int position_y, ref int position_x)
+        {
+            Button btn = new Button();
+            btn.Parent = control;
+            btn.Name = $"btn_search_{componentDto.Group}";
+            btn.Text = "...";
+            btn.Location = new System.Drawing.Point(position_x + 20, position_y);
+
+            var code = componentDto.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill.ConfigurationColumnSourceId);
+            var val = componentDto.ConfigurationColumns.FirstOrDefault(fi => fi.Id == config_fill.ConfigurationColumnDestinationId);
+            var search = new SearchDto()
+            {
+                LabelDescriptionName = val.Title,
+                LabelIdName = code.Title,
+                SearchItems = code.EnableValues,
+                ColumnSourceName = $"{code.Name}_{code.Id}",
+                ColumnDestinationName = $"{val.Name}_{val.Id}",
+            };
+
+            btn.Click += (object sender, EventArgs e) =>
+            {
+                var form = new GenericSearch(search);
+                form.Show();
+            };
+            position_y += 40;
+            position_x += btn.Width;
         }
 
         private static Control AddControl(TabPage tab, ComponentItemDto f)
@@ -160,7 +218,7 @@ namespace DynamicScreen
             return panel;
         }
 
-        private static int AddTextBox(Control control, ConfigurationColumnDto fo, int position)
+        private static void AddTextBox(Control control, ConfigurationColumnDto fo, ref int position_y, ref int position_x)
         {
             Label lbl = new Label();
             lbl.Text = fo.Title;
@@ -173,11 +231,13 @@ namespace DynamicScreen
             txt.TabIndex = fo.Index;
             txt.AutoSize = true;
             txt.Parent = control;
+            txt.ReadOnly = fo.ReadOnly;
 
-            lbl.Location = new System.Drawing.Point(20, position);
-            txt.Location = new System.Drawing.Point(lbl.Width + 20, position);
-            position += 40;
-            return position;
+            lbl.Location = new System.Drawing.Point(position_x, position_y);
+            position_x += lbl.Width;
+            txt.Location = new System.Drawing.Point(position_x, position_y);
+            position_x += txt.Width;
+            position_y += 40;
         }
 
         private static int AddComboBox(Control control, ConfigurationColumnDto fo, int position)

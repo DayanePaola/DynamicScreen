@@ -35,7 +35,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 0,
                     ReadOnly = false,
                     Group = "Material A",
-                    Method = null
+                    Method = "ObterListaDeCondutores"
                 },
                 new ConfigurationColumnModel
                 {
@@ -57,7 +57,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 2,
                     ReadOnly = false,
                     Group = "Material B",
-                    Method = null
+                    Method = "ObterListaDeCondutores"
                 },
                 new ConfigurationColumnModel
                 {
@@ -79,7 +79,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 4,
                     ReadOnly = false,
                     Group = "Material C",
-                    Method = null
+                    Method = "ObterListaDeCondutores"
                 },
                 new ConfigurationColumnModel
                 {
@@ -101,7 +101,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 6,
                     ReadOnly = false,
                     Group = "Material Neutro",
-                    Method = null
+                    Method = "ObterListaDeCondutores"
                 },
                 new ConfigurationColumnModel
                 {

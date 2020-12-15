@@ -9,6 +9,7 @@ namespace DynamicScreen.Business.Interfaces
 {
     public interface IConfigurationColumnFillRepository : IRepository<ConfigurationColumnFillModel>
     {
-        
+        IEnumerable<ConfigurationColumnFillModel> GetValuesByColumnSource(int idColumn);
+        IEnumerable<ConfigurationColumnFillModel> GetValuesByColumnDestination(int idColumn);
     }
 }

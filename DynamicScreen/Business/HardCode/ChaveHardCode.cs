@@ -35,7 +35,7 @@ namespace DynamicScreen.Business.HardCode
                     Index = 0,
                     ReadOnly = false,
                     Group = "Material Chave",
-                    Method = null
+                    Method = "ObterListaDeChaves"
                 },
                 new ConfigurationColumnModel
                 {

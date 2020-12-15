@@ -116,6 +116,7 @@ namespace DynamicScreen.View
             this.button2.TabIndex = 7;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btn_Cancelar_Click);
             // 
             // GenericSearch
             // 

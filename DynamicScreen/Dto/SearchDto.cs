@@ -8,8 +8,11 @@ namespace DynamicScreen.Dto
 {
     public class SearchDto
     {
-        public List<BaseSearchDto> SearchItems { get; set; }
+        public List<ValueDto> SearchItems { get; set; }
         public string LabelIdName { get; set; }
         public string LabelDescriptionName { get; set; }
+        public ValueDto SelectItem { get; set; }
+        public string ColumnSourceName { get; set; }
+        public string ColumnDestinationName { get; set; }
     }
 }

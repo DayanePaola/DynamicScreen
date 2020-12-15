@@ -12,6 +12,18 @@ namespace DynamicScreen.Data.Respository
     {
         public ConfigurationColumnFillRepository(Context db) : base(db)
         {
+
+        }
+        public IEnumerable<ConfigurationColumnFillModel> GetValuesByColumnSource(int idColumn)
+        {
+            return Db.ConfigurationColumnFill.AsNoTracking()
+                .Where(a => a.ConfigurationColumnSourceId == idColumn);
+        }
+
+        public IEnumerable<ConfigurationColumnFillModel> GetValuesByColumnDestination(int idColumn)
+        {
+            return Db.ConfigurationColumnFill.AsNoTracking()
+                .Where(a => a.ConfigurationColumnDestinationId == idColumn);
         }
     }
 }
