@@ -36,6 +36,68 @@ namespace DynamicScreen.Business.HardCode.Methods
 
             return valueDtos;
         }
+
+        public IEnumerable<ValueDto> ObterFase()
+        {
+            var valueDtos = new List<ValueDto>()
+            {
+                new ValueDto
+                {
+                    Id = "A",
+                    Value = "A"
+                },
+                new ValueDto
+                {
+                    Id = "B",
+                    Value = "B"
+                },
+                new ValueDto
+                {
+                    Id = "C",
+                    Value = "C"
+                },
+                new ValueDto
+                {
+                    Id = "AB",
+                    Value = "AB"
+                },
+                new ValueDto
+                {
+                    Id = "BC",
+                    Value = "BC"
+                },
+                new ValueDto
+                {
+                    Id = "AC",
+                    Value = "AC"
+                },
+                new ValueDto
+                {
+                    Id = "ABC",
+                    Value = "ABC"
+                }
+            };
+
+            return valueDtos;
+        }
+        public IEnumerable<ValueDto> ObterRadioSimNão()
+        {
+            var valueDtos = new List<ValueDto>()
+            {
+                new ValueDto
+                {
+                    Id = "true",
+                    Value = "Sim"
+                },
+                new ValueDto
+                {
+                    Id = "false",
+                    Value = "Não"
+                }
+            };
+
+            return valueDtos;
+        }
         public IEnumerable<ValueDto> ObterVelocidadeDoVento()
         {
             var valueDtos = new List<ValueDto>()
@@ -60,6 +122,29 @@ namespace DynamicScreen.Business.HardCode.Methods
             return valueDtos;
         }
 
+        public IEnumerable<ValueDto> ObterTensao()
+        {
+            var valueDtos = new List<ValueDto>()
+            {
+                new ValueDto
+                {
+                    Id = "10",
+                    Value = "10KvA"
+                },
+                new ValueDto
+                {
+                    Id = "15",
+                    Value = "15KvA"
+                },
+                new ValueDto
+                {
+                    Id = "20",
+                    Value = "20KvA"
+                }
+            };
+
+            return valueDtos;
+        }
         private IEnumerable<ValueDto> MapTopologiaToValueDto(IEnumerable<Topologia> topologias)
         {
             foreach (var item in topologias)

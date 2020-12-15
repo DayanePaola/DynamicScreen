@@ -55,6 +55,7 @@ namespace DynamicScreen.View
             this.dgv_search.ReadOnly = true;
             this.dgv_search.Size = new System.Drawing.Size(394, 351);
             this.dgv_search.TabIndex = 0;
+            this.dgv_search.SelectionChanged += new System.EventHandler(this.dgv_search_SelectionChanged);
             this.dgv_search.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgv_search_MouseDoubleClick);
             // 
             // btn_search
@@ -107,6 +108,7 @@ namespace DynamicScreen.View
             this.button1.TabIndex = 6;
             this.button1.Text = "Selecionar";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btn_Selecionar_Click);
             // 
             // button2
             // 
