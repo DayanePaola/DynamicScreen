@@ -17,12 +17,6 @@ namespace DynamicScreen.Business.Forms
     {
         public static void GetComponent(List<ConfigurationColumnDto> columns, List<ConfigurationRowDto> rows, Control control)
         {
-            //var panel = new Panel();
-            //panel.SuspendLayout();
-            //panel.Name = $"pnl_mygrid";
-            //panel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            //panel.Dock = DockStyle.Top;
-            //panel.Parent = control;
 
             var myNewGrid = new DataGridView();
             ((ISupportInitialize)(myNewGrid)).BeginInit();
@@ -32,9 +26,7 @@ namespace DynamicScreen.Business.Forms
             myNewGrid.Location = new Point(20, 350);
             myNewGrid.Name = "myNewGrid";
             myNewGrid.Size = new Size(750, 100);
-            //myNewGrid.AutoSize = true;
             myNewGrid.TabIndex = 0;
-            myNewGrid.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             myNewGrid.ColumnHeadersVisible = true;
             myNewGrid.RowHeadersVisible = true;
             myNewGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

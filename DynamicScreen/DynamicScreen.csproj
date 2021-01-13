@@ -118,6 +118,12 @@
     <Compile Include="Business\Services\ConfigurationService.cs" />
     <Compile Include="Business\Services\IConfigurationColumnFillService.cs" />
     <Compile Include="Business\Services\MethodColumnService.cs" />
+    <Compile Include="Business\Services\UC_TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Business\Services\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Business\Util\ObjectExtensions.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Mappings\ConfigurationColumnFillMapping.cs" />
@@ -144,6 +150,7 @@
     <Compile Include="Dto\ConfigurationRowDto.cs" />
     <Compile Include="Dto\ConfigurationTabDto.cs" />
     <Compile Include="Dto\ConfigurationValueDto.cs" />
+    <Compile Include="Dto\ConfiugurationAtribute.cs" />
     <Compile Include="Dto\ValueDto.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -196,6 +203,12 @@
     <Compile Include="View\GenericSearch.Designer.cs">
       <DependentUpon>GenericSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UC_TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UC_TextBox.Designer.cs">
+      <DependentUpon>UC_TextBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Data\Migrations\202011150113368_InitialDb.resx">
       <DependentUpon>202011150113368_InitialDb.cs</DependentUpon>
     </EmbeddedResource>
@@ -228,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm1.resx">
       <DependentUpon>MainForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UC_TextBox.resx">
+      <DependentUpon>UC_TextBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

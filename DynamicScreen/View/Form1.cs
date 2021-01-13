@@ -30,7 +30,6 @@ namespace DynamicScreen
             TabPage tbp = new TabPage();
             tbp.Name = "tb_cabo";
             tbp.Text = "Condutores";
-            tabControl1.TabPages.Add(tbp);
 
             TextBox cnt = new TextBox();
             cnt.Name = "Cnt" + tbp.Name;

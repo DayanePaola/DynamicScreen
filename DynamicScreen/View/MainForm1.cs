@@ -44,7 +44,19 @@ namespace DynamicScreen
                 AddButtonSave(item, AddPanel(tab, item.Index, 1), tab);
                 SetComponents(item, tab);
                 tab.ResumeLayout();
+                tab.AutoScroll = false;
+                var form1 = new View.UC_TextBox
+                {
+                    AutoScroll = true,
+                    Location = new System.Drawing.Point(4, 385),
+                    Name = $"userControl_{item.Id}",
+                    Size = new System.Drawing.Size(500, 132),
+                    TabIndex = 1,
+                    Visible = true
+                };
+                tab.Controls.Add(form1);
             }
+
         }
 
         private void AddButtonSave(ConfigurationTabDto item, Control control, TabPage tab)
