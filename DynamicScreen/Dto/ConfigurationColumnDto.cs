@@ -16,5 +16,7 @@ namespace DynamicScreen.Dto
         public string DataType { get; set; }
         public ComponentAllowed Component { get; set; }
         public List<ValueDto> EnableValues { get; set; }
+
+        public List<ConfiugurationAtribute> Atributos { get; set; }
     }
 }

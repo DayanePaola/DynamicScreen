@@ -44,6 +44,9 @@
     <Reference Include="EntityFramework6.Npgsql, Version=6.4.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework6.Npgsql.6.4.1\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=4.0.10.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.0.10\lib\net45\Npgsql.dll</HintPath>
     </Reference>
@@ -80,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\AutoMapper\AutoMapperProfile.cs" />
+    <Compile Include="Business\Forms\DataGridViewFormService.cs" />
     <Compile Include="Business\Forms\ComboBoxFormService.cs" />
     <Compile Include="Business\Forms\CheckBoxFormService.cs" />
     <Compile Include="Business\Forms\TextBoxFormService.cs" />
@@ -108,10 +112,18 @@
     <Compile Include="Business\Interfaces\IRepository.cs" />
     <Compile Include="Business\Forms\RadioButonFormService.cs" />
     <Compile Include="Business\Services\ConfigurationColumnService.cs" />
+    <Compile Include="Business\Services\ConfigurationColumnFillService.cs" />
     <Compile Include="Business\Services\ConfigurationValueService.cs" />
     <Compile Include="Business\Services\ConfigurationRowService.cs" />
     <Compile Include="Business\Services\ConfigurationService.cs" />
+    <Compile Include="Business\Services\IConfigurationColumnFillService.cs" />
     <Compile Include="Business\Services\MethodColumnService.cs" />
+    <Compile Include="Business\Services\UC_TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Business\Services\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Business\Util\ObjectExtensions.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Mappings\ConfigurationColumnFillMapping.cs" />
@@ -133,10 +145,12 @@
     <Compile Include="Data\Respository\Repository.cs" />
     <Compile Include="Dto\ComponentItemDto.cs" />
     <Compile Include="Dto\ConfigurationColumnDto.cs" />
+    <Compile Include="Dto\ConfigurationColumnFillDto.cs" />
     <Compile Include="Dto\ConfigurationDto.cs" />
     <Compile Include="Dto\ConfigurationRowDto.cs" />
     <Compile Include="Dto\ConfigurationTabDto.cs" />
     <Compile Include="Dto\ConfigurationValueDto.cs" />
+    <Compile Include="Dto\ConfiugurationAtribute.cs" />
     <Compile Include="Dto\ValueDto.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -147,7 +161,6 @@
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dto\BaseSearchDto.cs" />
     <Compile Include="Dto\SearchDto.cs" />
     <Compile Include="Enums\ComponentAllowed.cs" />
     <Compile Include="MainForm.Designer.cs">
@@ -190,6 +203,12 @@
     <Compile Include="View\GenericSearch.Designer.cs">
       <DependentUpon>GenericSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\UC_TextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UC_TextBox.Designer.cs">
+      <DependentUpon>UC_TextBox.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Data\Migrations\202011150113368_InitialDb.resx">
       <DependentUpon>202011150113368_InitialDb.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainForm1.resx">
       <DependentUpon>MainForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UC_TextBox.resx">
+      <DependentUpon>UC_TextBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -11,7 +11,7 @@ namespace DynamicScreen.Enums
         TextBox, 
         TextArea,
         CheckBox,
-        SeachModal,
+        SearchModal,
         RadioButton,
         DropDownList
     }

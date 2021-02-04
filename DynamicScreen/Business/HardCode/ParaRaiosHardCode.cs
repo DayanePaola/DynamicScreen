@@ -45,7 +45,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Tensao",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -56,7 +56,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 2,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Limite",
                     Method = null
                 }
             };

@@ -56,6 +56,12 @@ namespace DynamicScreen.Business.AutoMapper
                 conf.CreateMap<ConfigurationValueDto, ConfigurationValueModel>()
                 .ForMember(dest => dest.ConfigurationColumn, opt => opt.Ignore())
                 .ForMember(dest => dest.ConfigurationRow, opt => opt.Ignore());
+
+                conf.CreateMap<ConfigurationColumnFillModel, ConfigurationColumnFillDto>();
+
+                conf.CreateMap<ConfigurationColumnFillDto, ConfigurationColumnFillModel>()
+                .ForMember(dest => dest.ConfigurationColumnDestination, opt => opt.Ignore())
+                .ForMember(dest => dest.ConfigurationColumnSource, opt => opt.Ignore());
             });
         }
 

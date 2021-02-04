@@ -13,11 +13,16 @@ namespace DynamicScreen.View
 {
     public partial class GenericSearch : Form
     {
-        public List<BaseSearchDto> BaseListSearch { get; set; }
-        public GenericSearch(SearchDto searchDto)
+        public List<ValueDto> BaseListSearch { get; set; }
+        public SearchDto SearchDtoBase { get; set; }
+        private MainForm1 Called { get; set; }
+        public GenericSearch(SearchDto searchDto, MainForm1 called)
         {
             InitializeComponent();
+            Called = called;         
             BaseListSearch = searchDto.SearchItems;
+            SearchDtoBase = searchDto;
+            SearchDtoBase.SelectItem = new ValueDto();
             SetLabelsName(searchDto);
             BindingGrid(searchDto);
         }
@@ -31,8 +36,6 @@ namespace DynamicScreen.View
         private void BindingGrid(SearchDto searchDto)
         {
             var bindingSource = new BindingSource();
-            //dgv_search.Columns.Add(new DataGridViewColumn() { Name = "id", HeaderText = searchDto.LabelIdName.ToUpper(),DataPropertyName ="Id" });
-            //dgv_search.Columns.Add(new DataGridViewColumn() { Name = "description", HeaderText= searchDto.LabelDescriptionName.ToUpper(), DataPropertyName = "Description" });
             dgv_search.AutoGenerateColumns = true;
             dgv_search.DataSource = searchDto.SearchItems;
             dgv_search.AutoResizeColumns();
@@ -46,12 +49,36 @@ namespace DynamicScreen.View
             dgv_search.DataSource = BaseListSearch.Where(w=> (string.IsNullOrWhiteSpace(txt_id.Text) 
                                                              || w.Id.ToUpper().Contains(txt_id.Text.ToUpper())) 
                                                           && (string.IsNullOrWhiteSpace(txt_description.Text) 
-                                                             ||  w.Description.ToUpper().Contains(txt_description.Text.ToUpper()))).ToList();
+                                                             ||  w.Value.ToUpper().Contains(txt_description.Text.ToUpper()))).ToList();
         }
 
         private void dgv_search_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            
+        }
 
+        private void btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            SearchDtoBase = null;
+            this.Hide();
+            Called.Show();
+        }
+        private void btn_Selecionar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Called.Show();
+            Called.BringToFront();
+            Called.SetFieldValue(SearchDtoBase);
+        }
+
+        private void dgv_search_SelectionChanged(object sender, EventArgs e)
+        {
+            if (((DataGridView)sender).SelectedRows.Count > 0)
+            {
+                var val = ((DataGridView)sender).SelectedRows[0];
+                SearchDtoBase.SelectItem.Id = val.Cells[0].Value.ToString();
+                SearchDtoBase.SelectItem.Value = val.Cells[1].Value.ToString();
+            }
         }
     }
 }

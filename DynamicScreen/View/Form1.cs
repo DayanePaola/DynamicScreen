@@ -30,7 +30,6 @@ namespace DynamicScreen
             TabPage tbp = new TabPage();
             tbp.Name = "tb_cabo";
             tbp.Text = "Condutores";
-            tabControl1.TabPages.Add(tbp);
 
             TextBox cnt = new TextBox();
             cnt.Name = "Cnt" + tbp.Name;
@@ -41,24 +40,24 @@ namespace DynamicScreen
             btn.Name = "btn_search";
             btn.Text = "...";
 
-            var search = new SearchDto()
-            {
-                LabelDescriptionName = "Descrição",
-                LabelIdName = "Código",
-                SearchItems = new List<BaseSearchDto>
-                {
-                    new BaseSearchDto(){ Id = "15002640", Description= "CHAVE FUS. DSTB,TIPO C,15KV C/PF. PORCELANA" },
-                    new BaseSearchDto(){ Id = "20009773", Description= "SECCIONADORA DE FACA UNIP 15KV 630A" },
-                    new BaseSearchDto(){ Id = "20015404", Description= "Religador Aut.Monof.Simplif.25kV;1 relig" },
-                    new BaseSearchDto(){ Id = "20015405", Description= "Religador Aut.Monof.Simplif.25KV-3 RELIG" }
-                }
-            };
+            //var search = new SearchDto()
+            //{
+            //    LabelDescriptionName = "Descrição",
+            //    LabelIdName = "Código",
+            //    SearchItems = new List<BaseSearchDto>
+            //    {
+            //        new BaseSearchDto(){ Id = "15002640", Description= "CHAVE FUS. DSTB,TIPO C,15KV C/PF. PORCELANA" },
+            //        new BaseSearchDto(){ Id = "20009773", Description= "SECCIONADORA DE FACA UNIP 15KV 630A" },
+            //        new BaseSearchDto(){ Id = "20015404", Description= "Religador Aut.Monof.Simplif.25kV;1 relig" },
+            //        new BaseSearchDto(){ Id = "20015405", Description= "Religador Aut.Monof.Simplif.25KV-3 RELIG" }
+            //    }
+            ////};
 
-            btn.Click += (object sender, EventArgs e) =>
-            {
-                var form = new GenericSearch(search);
-                form.Show();
-            };
+            //btn.Click += (object sender, EventArgs e) =>
+            //{
+            //    var form = new GenericSearch(search);
+            //    form.Show();
+            //};
             tbp.Controls.Add(btn);
 
         }
@@ -66,8 +65,8 @@ namespace DynamicScreen
         private void ReturnClickMethod(object sender, EventArgs e)
         {
             SearchDto searchDto = (SearchDto)sender;
-            var form = new GenericSearch(searchDto);
-            form.Show();
+            //var form = new GenericSearch(searchDto, this);
+            //form.Show();
         }
     }
 }

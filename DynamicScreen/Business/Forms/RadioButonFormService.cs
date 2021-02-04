@@ -23,10 +23,10 @@ namespace DynamicScreen.Business.Forms
                 {
                     var radio = new RadioButton
                     {
-                        Name = $"{column.Name}_{item.Id}",
+                        Name = $"{column.Name}_{column.Id}_{item.Id}",
                         Text = item.Value,
-                        Dock = DockStyle.Top,
-                        Parent = group
+                        Parent = group,
+                        AutoSize = true
                     };
                     radio.Location = new Point(i, 20);
                     position += 40;

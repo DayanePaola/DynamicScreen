@@ -34,7 +34,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 0,
                     ReadOnly = true,
-                    Group = null,
+                    Group = "EstruturaSecundariaIdealDefault",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -45,7 +45,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "DistanciaTrechoSecundario",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -56,7 +56,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 2,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "DistanciaMinimaEntrePostes",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -67,7 +67,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 3,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "EncurtamentoTrechoBT",
                     Method = null
                 }
             };

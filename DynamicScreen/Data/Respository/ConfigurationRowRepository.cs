@@ -24,7 +24,9 @@ namespace DynamicScreen.Data.Respository
         public IEnumerable<ConfigurationRowModel> GetRowsByConfiguration(int idConfiguration)
         {
             return Db.ConfigurationRow.AsNoTracking()
-                .Where(a => a.ConfigurationId == idConfiguration);
+                .Include("ConfigurationValue")
+                .Where(a => a.ConfigurationId == idConfiguration)
+                .ToList();
         }
     }
 }

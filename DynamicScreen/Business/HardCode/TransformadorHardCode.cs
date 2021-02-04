@@ -34,7 +34,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 0,
                     ReadOnly = false,
-                    Group = null,
+                    Group =  "TensaoDeOperacao",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -45,7 +45,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 1,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "TipoDeFaseDeDestino",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -56,7 +56,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 2,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "FaseDeOrigem",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -64,10 +64,10 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 3,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Transformador",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -76,7 +76,7 @@ namespace DynamicScreen.Business.HardCode
                     Name = "Visao",
                     Title = "Visão",
                     Component = "TextBox",
-                    Index = 4,
+                    Index = 5,
                     ReadOnly = false,
                     Group = null,
                     Method = null
@@ -86,10 +86,10 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Descricao",
                     Title = "Descrição",
-                    Component = "TextArea",
-                    Index = 5,
+                    Component = "SearchModal",
+                    Index = 4,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Transformador",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -100,19 +100,19 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 6,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Potencia",
                     Method = null
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "AtivoNoPDN",
-                    Title = "Status: ",
+                    Title = "Status",
                     Component = "RadioButton",
                     Index = 7,
                     ReadOnly = false,
-                    Group = "status",
-                    Method = "ObterRadioStatus"
+                    Group = "Status",
+                    Method = null
                 },
                 new ConfigurationColumnModel
                 {
@@ -122,7 +122,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 8,
                     ReadOnly = false,
-                    Group = null,
+                    Group =  "CodigoDaChave",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -133,12 +133,30 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 9,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "CodigoDoElo",
                     Method = null
                 }
             };
 
             return listColumns;
+        }
+
+        public IEnumerable<ConfigurationColumnFillModel> CreateFill(List<ConfigurationColumnModel> columns)
+        {
+            var listFill = new List<ConfigurationColumnFillModel>();
+
+            var col = columns.GroupBy(g => g.Group)
+                .Select(s => new { Group = s.Key, Columns = s.ToList() })
+                .ToList();
+            foreach (var item in col)
+            {
+                listFill.Add(new ConfigurationColumnFillModel
+                {
+                    ConfigurationColumnSourceId = item.Columns.FirstOrDefault().Id,
+                    ConfigurationColumnDestinationId = item.Columns.LastOrDefault().Id
+                });
+            }
+            return listFill;
         }
     }
 }

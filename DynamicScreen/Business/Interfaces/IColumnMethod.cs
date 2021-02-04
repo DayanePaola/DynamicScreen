@@ -11,5 +11,8 @@ namespace DynamicScreen.Business.Interfaces
     public interface IColumnMethod
     {
         IEnumerable<ValueDto> ObterListaDeTopologias();
+        IEnumerable<ValueDto> ObterListaDeChaves();
+        IEnumerable<ValueDto> ObterListaDeTransformadores();
+        IEnumerable<ValueDto> ObterListaDeCondutores();
     }
 }

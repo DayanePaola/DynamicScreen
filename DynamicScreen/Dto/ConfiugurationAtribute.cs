@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace DynamicScreen.Dto
 {
-    public class BaseSearchDto
+    public class ConfiugurationAtribute
     {
-        public string Id { get; set; }
-        public string Description { get; set; }
+        public int Id { get; set; }
+        public string Tipo { get; set; }
+        public string Valor { get; set; }
     }
 }

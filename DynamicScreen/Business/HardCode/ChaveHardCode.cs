@@ -31,44 +31,44 @@ namespace DynamicScreen.Business.HardCode
                     ConfigurationId = idConfiguration,
                     Name = "Codigo",
                     Title = "Código",
-                    Component = "TextBox",
+                    Component = "SearchModal",
                     Index = 0,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "Material Chave",
+                    Method = "ObterListaDeChaves"
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "Fase",
                     Title = "Fase",
-                    Component = "DropDownList",
-                    Index = 1,
+                    Component = "CheckBox",
+                    Index = 2,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "Fase",
+                    Method = "ObterFase"
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "Descricao",
                     Title = "Descrição",
-                    Component = "TextArea",
-                    Index = 2,
-                    ReadOnly = false,
-                    Group = null,
+                    Component = "SearchModal",
+                    Index = 1,
+                    ReadOnly = true,
+                    Group = "Material Chave",
                     Method = null
                 },
                 new ConfigurationColumnModel
                 {
                     ConfigurationId = idConfiguration,
                     Name = "AtivoNoPDN",
-                    Title = "Ativo no PDN",
+                    Title = "Status",
                     Component = "RadioButton",
                     Index = 3,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "Status",
+                    Method = "ObterRadioStatus"
                 },
                 new ConfigurationColumnModel
                 {
@@ -78,8 +78,8 @@ namespace DynamicScreen.Business.HardCode
                     Component = "DropDownList",
                     Index = 4,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "Tensão",
+                    Method = "ObterTensao"
                 },
                 new ConfigurationColumnModel
                 {
@@ -89,7 +89,7 @@ namespace DynamicScreen.Business.HardCode
                     Component = "TextBox",
                     Index = 5,
                     ReadOnly = false,
-                    Group = null,
+                    Group = "Quantidade",
                     Method = null
                 },
                 new ConfigurationColumnModel
@@ -100,12 +100,30 @@ namespace DynamicScreen.Business.HardCode
                     Component = "RadioButton",
                     Index = 6,
                     ReadOnly = false,
-                    Group = null,
-                    Method = null
+                    Group = "Subestação",
+                    Method = "ObterRadioSimNão"
                 }
             };
 
             return listColumns;
+        }
+
+        public IEnumerable<ConfigurationColumnFillModel> CreateFill(List<ConfigurationColumnModel> columns)
+        {
+            var listFill = new List<ConfigurationColumnFillModel>();
+
+            var col = columns.GroupBy(g => g.Group)
+                .Select(s => new { Group = s.Key, Columns = s.ToList() })
+                .ToList();
+            foreach (var item in col)
+            {
+                listFill.Add(new ConfigurationColumnFillModel
+                {
+                    ConfigurationColumnSourceId = item.Columns.FirstOrDefault().Id,
+                    ConfigurationColumnDestinationId = item.Columns.LastOrDefault().Id
+                });
+            }
+            return listFill;
         }
     }
 }
